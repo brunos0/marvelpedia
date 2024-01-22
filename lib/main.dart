@@ -25,13 +25,22 @@ void main() {
                 )),
           )),
           Positioned(
+            top: 310,
+            left: 30,
+            child: Opacity(
+              opacity: 0.1,
+              child: Image.asset('assets/pokeball.png',
+                  height: 140, width: 140, colorBlendMode: BlendMode.modulate),
+            ),
+          ),
+          Positioned(
               top: 280,
-              left: 10,
+              left: 40,
               child: Transform(
                 alignment: Alignment.center,
                 transform: Matrix4.rotationY(math.pi),
                 child: Image.network(
-                  'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png',
+                  'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png',
                   //Image.asset(
                   //  'assets/pikachu.png',
                   height: 200,
