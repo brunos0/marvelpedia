@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 
 void main() {
   runApp(
@@ -26,10 +27,16 @@ void main() {
           Positioned(
               top: 280,
               left: 10,
-              child: Image.asset(
-                'assets/pikachu.png',
-                height: 200,
-                width: 200,
+              child: Transform(
+                alignment: Alignment.center,
+                transform: Matrix4.rotationY(math.pi),
+                child: Image.network(
+                  'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png',
+                  //Image.asset(
+                  //  'assets/pikachu.png',
+                  height: 200,
+                  width: 200,
+                ),
               ))
         ]),
       ),
