@@ -10,10 +10,11 @@ class Pokemon extends Equatable {
   double? weight;
   String? gender;
   String? category;
+  List<Map<String, dynamic>>? stats;
+  List<String>? types;
   List<String>? abilities;
   List<String>? weakness;
-  List<String>? strenghts;
-  List<String>? stats;
+  List<String>? strengths;
   List<String>? evolution;
   List<String>? moves;
 
@@ -26,9 +27,10 @@ class Pokemon extends Equatable {
         weight,
         gender,
         category,
+        types,
         abilities,
         weakness,
-        strenghts,
+        strengths,
         stats,
         evolution,
         moves

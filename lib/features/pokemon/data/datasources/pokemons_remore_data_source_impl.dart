@@ -38,14 +38,17 @@ class PokemonsRemoteDataSourceImpl implements PokemonsRemoteDataSource {
             List<String> abilities;
             List<Map<String, dynamic>> stats;
             List<String> moves;
+            List<String> types;
             double weight;
             double height;
-            (abilities, stats, moves, weight, height) =
+            (abilities, stats, moves, weight, height, types) =
                 pkModel.detailsFromJson(json.decode(response.body));
             pkModel.pokemons[i].abilities = abilities;
             pkModel.pokemons[i].moves = moves;
             pkModel.pokemons[i].weight = weight;
             pkModel.pokemons[i].height = height;
+            pkModel.pokemons[i].types = types;
+            pkModel.pokemons[i].stats = stats;
             pkModel.step = 2;
           }
         }

@@ -35,16 +35,19 @@ class PokemonsModel extends Pokemons {
     List<Map<String, dynamic>> listStats,
     List<String> listMovies,
     double weight,
-    double height
+    double height,
+    List<String> listTypes
   ) detailsFromJson(Map<String, dynamic> json) {
     final List<String> listAbilities = [];
     final List<Map<String, dynamic>> listStats = [];
     final List<String> listMoves = [];
+    final List<String> listTypes = [];
     final abilities = json['abilities'];
     final stats = json['stats'];
     final moves = json['moves'];
     final double weight = json['weight'] / 10;
     final double height = json['height'] / 1;
+    final types = json['types'];
 
     final listSize = abilities.length;
     for (int i = 0; i < listSize; ++i) {
@@ -53,7 +56,6 @@ class PokemonsModel extends Pokemons {
 
     final listStatsSize = stats.length;
     for (int i = 0; i < listStatsSize; ++i) {
-      //base_stat
       listStats.add({
         stats[i]['stat']['name']: stats[i]['base_stat'],
       });
@@ -61,13 +63,15 @@ class PokemonsModel extends Pokemons {
 
     final listMovesSize = moves.length;
     for (int i = 0; i < listMovesSize; ++i) {
-      //base_stat
-      listMoves.add(moves[i]['move']['name']
-          // {stats[i]['stat']['name']: stats[i]['base_stat'],}
-          );
+      listMoves.add(moves[i]['move']['name']);
     }
 
-    return (listAbilities, listStats, listMoves, weight, height);
+    final listTypesSize = types.length;
+    for (int i = 0; i < listTypesSize; ++i) {
+      listTypes.add(types[i]['type']['name']);
+    }
+
+    return (listAbilities, listStats, listMoves, weight, height, listTypes);
   }
 
   // TODO(bruno): implements
