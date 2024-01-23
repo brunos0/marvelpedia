@@ -9,6 +9,6 @@ class GetPokemons implements UseCase<Pokemons, NoParams> {
 
   @override
   Future<(Pokemons?, Failure?)> call(NoParams params) async {
-    return await repository.getMovies();
+    return await repository.getPokemons();
   }
 }

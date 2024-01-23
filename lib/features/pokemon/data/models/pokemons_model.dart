@@ -2,10 +2,11 @@ import 'package:pocketpedia/features/pokemon/domain/entities/pokemon.dart';
 import 'package:pocketpedia/features/pokemon/domain/entities/pokemons.dart';
 
 class PokemonsModel extends Pokemons {
-  const PokemonsModel({required List<Pokemon> movies}) : super(movies: movies);
+  const PokemonsModel({required List<Pokemon> pokemons})
+      : super(pokemons: pokemons);
 
   factory PokemonsModel.fromJson(Map<String, dynamic> json) {
-    List<Pokemon> movies = [];
+    List<Pokemon> pokemons = [];
 
     // TODO(bruno): implements
     /*
@@ -19,18 +20,16 @@ class PokemonsModel extends Pokemons {
           overview: '${jsonList[i]['overview'].replaceAll('\'', '')}',
           urlCover: '${jsonList[i]['poster_path']}'));
     }
-
-    return MoviesModel(movies: movies);
-    
+    */
+    return PokemonsModel(pokemons: pokemons);
   }
-  */
 
-    // TODO(bruno): implements
-    Map<String, List<Map<String, String>>> toJson() {
-      List<Map<String, String>> moveItem = [];
+  // TODO(bruno): implements
+  Map<String, List<Map<String, String>>> toJson() {
+    List<Map<String, String>> moveItem = [];
 
-      int listSize = movies.length;
-      /*
+    int listSize = pokemons.length;
+    /*
     for (int i = 0; i < listSize; i++) {
       moveItem.add(
         {
@@ -42,6 +41,6 @@ class PokemonsModel extends Pokemons {
     }
     return {"result": moveItem};
     */
-    }
+    return {"pokemons": []};
   }
 }

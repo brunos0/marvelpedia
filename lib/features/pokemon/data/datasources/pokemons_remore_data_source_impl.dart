@@ -8,8 +8,8 @@ import 'package:pocketpedia/features/pokemon/data/models/pokemons_model.dart';
 
 String tmdbApiKey = const String.fromEnvironment('API_KEY_TMDB');
 
-class MoviesRemoteDataSourceImpl implements PokemonsRemoteDataSource {
-  const MoviesRemoteDataSourceImpl({required this.client});
+class PokemonsRemoteDataSourceImpl implements PokemonsRemoteDataSource {
+  const PokemonsRemoteDataSourceImpl({required this.client});
 
   final http.Client client;
 
