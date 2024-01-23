@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:pocketpedia/utils/app_routes.dart';
 import 'package:pocketpedia/utils/color_picker.dart';
 import 'package:pocketpedia/utils/string_extensions.dart';
@@ -24,15 +25,19 @@ class PokemonClip extends StatelessWidget {
             height: 20,
             width: 60,
             color: colorTypePicker(list[i]),
-            // TODO(bruno): icon
-            child: Center(
-                child: Text(
-              list[i].split(' ').map((word) => word.capitalize()).join(' '),
-              style: const TextStyle(
-                fontSize: 10,
-                color: Colors.white,
-              ),
-            )),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SvgPicture.asset('assets/types/${list[i]}.svg'),
+                Text(
+                  list[i].split(' ').map((word) => word.capitalize()).join(' '),
+                  style: const TextStyle(
+                    fontSize: 10,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       );
@@ -87,7 +92,6 @@ class PokemonClip extends StatelessWidget {
               SizedBox(
                 width: 190,
                 child: Container(
-                  // color: Colors.red,
                   child: Stack(
                     children: [
                       Opacity(
@@ -102,33 +106,34 @@ class PokemonClip extends StatelessWidget {
                         ),
                       ),
                       GestureDetector(
-                          child: Hero(
-                            tag: pokemonName,
-                            child: Align(
+                        child: Hero(
+                          tag: pokemonName,
+                          child: Align(
+                            alignment: Alignment.bottomLeft,
+                            child: FadeInImage(
                               alignment: Alignment.bottomLeft,
-                              child: FadeInImage(
-                                alignment: Alignment.bottomLeft,
-                                height: 100,
-                                width: 100,
-                                placeholder:
+                              height: 100,
+                              width: 100,
+                              placeholder:
 
-                                    // TODO(bruno): se pikachu então imagem local
-                                    NetworkImage(
-                                        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$pokemonNumber.png'),
-                                image: NetworkImage(
-                                    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$pokemonNumber.png'),
-                                fit: BoxFit.cover,
-                              ),
+                                  // TODO(bruno): se pikachu então imagem local
+                                  NetworkImage(
+                                      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$pokemonNumber.png'),
+                              image: NetworkImage(
+                                  'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$pokemonNumber.png'),
+                              fit: BoxFit.cover,
                             ),
                           ),
-                          onTap: () {
-                            /*
+                        ),
+                        onTap: () {
+                          /*
                           Navigator.of(context).pushNamed(
                             AppRoutes.movieDetail,
                             arguments: (movieName, movieDescription, moviePoster),
                           );
                           */
-                          }),
+                        },
+                      ),
                     ],
                   ),
                 ),

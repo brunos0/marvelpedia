@@ -21,13 +21,15 @@ class PokemonsDisplay extends StatelessWidget {
             //scrollDirection: Axis.horizontal,
             itemCount: pokemons.pokemons.length,
             itemBuilder: (BuildContext context, int index) {
-              return SizedBox(
-                  width: 370,
-                  height: 130,
-                  child: PokemonClip(
-                      pokemonNumber: pokemons.pokemons[index].number,
-                      pokemonName: pokemons.pokemons[index].name,
-                      pokemonTypes: pokemons.pokemons[index].types!));
+              return Center(
+                child: SizedBox(
+                    width: 370,
+                    height: 130,
+                    child: PokemonClip(
+                        pokemonNumber: pokemons.pokemons[index].number,
+                        pokemonName: pokemons.pokemons[index].name,
+                        pokemonTypes: pokemons.pokemons[index].types!)),
+              );
             },
           ),
         ),
