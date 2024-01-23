@@ -16,13 +16,41 @@ class PokemonsRemoteDataSourceImpl implements PokemonsRemoteDataSource {
   @override
   Future<PokemonsModel?> getPokemons() async {
     final response = await client.get(
-        Uri.parse('https://api.themoviedb.org/3/discover/movie'),
+        Uri.parse(
+            'https://pokeapi.co/api/v2/pokemon?offset=0&limit=20'), //9999999
         headers: {
           'Content-Type': 'application/json; charset=utf-8',
-          'Authorization': 'Bearer $tmdbApiKey'
         });
     if (response.statusCode == 200) {
-      return (PokemonsModel.fromJson(json.decode(response.body)));
+      final pkModel = PokemonsModel.fromJson(json.decode(response.body));
+      if (pkModel.step == 1) {
+        final listSize = pkModel.pokemons.length;
+        for (int i = 0; i < listSize; i++) {
+          final response = await client.get(
+              Uri.parse(
+                'https://pokeapi.co/api/v2/pokemon/${pkModel.pokemons[i].name.trim()}',
+              ), //9999999
+              headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+              });
+          if (response.statusCode == 200) {
+            //
+            List<String> abilities;
+            List<Map<String, dynamic>> stats;
+            List<String> moves;
+            double weight;
+            double height;
+            (abilities, stats, moves, weight, height) =
+                pkModel.detailsFromJson(json.decode(response.body));
+            pkModel.pokemons[i].abilities = abilities;
+            pkModel.pokemons[i].moves = moves;
+            pkModel.pokemons[i].weight = weight;
+            pkModel.pokemons[i].height = height;
+            pkModel.step = 2;
+          }
+        }
+      }
+      return pkModel;
     } else {
       throw (ServerException());
     }

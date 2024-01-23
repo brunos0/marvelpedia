@@ -6,7 +6,7 @@ import 'package:pocketpedia/features/pokemon/presentation/bloc/pokemons_state.da
 import 'package:pocketpedia/features/pokemon/presentation/widgets/loading_widget.dart';
 import 'package:pocketpedia/features/pokemon/presentation/widgets/message_display.dart';
 import 'package:pocketpedia/injection_container.dart';
-import 'package:pocketpedia/features/pokemon/presentation/widgets/pokemons_display.dart';
+import 'package:pocketpedia/pages/pokemons_display.dart';
 
 class PokemonsPage extends StatefulWidget {
   const PokemonsPage({super.key});
@@ -22,6 +22,7 @@ class _PokemonsPageState extends State<PokemonsPage> {
       body: Center(
         child: Column(
           children: <Widget>[
+            /*
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child:
@@ -53,6 +54,7 @@ class _PokemonsPageState extends State<PokemonsPage> {
                 )
               ]),
             ),
+            */
             SingleChildScrollView(child: buildBody(context)),
           ],
         ),

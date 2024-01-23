@@ -6,16 +6,16 @@ class Pokemon extends Equatable {
   final String number;
   final String name;
   String? description;
-  String? height;
-  String? weight;
+  double? height;
+  double? weight;
   String? gender;
   String? category;
   List<String>? abilities;
   List<String>? weakness;
-  List<String>? streanghts;
+  List<String>? strenghts;
   List<String>? stats;
   List<String>? evolution;
-  List<String>? movies;
+  List<String>? moves;
 
   @override
   List<Object?> get props => [
@@ -28,9 +28,9 @@ class Pokemon extends Equatable {
         category,
         abilities,
         weakness,
-        streanghts,
+        strenghts,
         stats,
         evolution,
-        movies
+        moves
       ];
 }
