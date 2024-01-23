@@ -101,7 +101,6 @@ class PokemonClip extends StatelessWidget {
                               colorBlendMode: BlendMode.modulate),
                         ),
                       ),
-                      // TODO(bruno): se pikachu então imagem local
                       GestureDetector(
                           child: Hero(
                             tag: pokemonName,
