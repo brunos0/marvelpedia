@@ -52,23 +52,23 @@ Color colorTypePicker(String type) {
 
 enum TypesBackground {
   grass(Color(0xFF70D090)),
-  poison(Color(0xFF8849B0)),
+  poison(Color(0xFFDDA1E7)),
   fire(Color(0xFFEC8C4C)),
   flying(Color(0xFFAACBE1)),
   water(Color(0xFF20C5F5)),
-  normal(Color(0xFF7D3600)),
-  eletric(Color(0xFFF8A801)),
-  ground(Color(0xFF673E2C)),
-  fairy(Color(0xFFFF48CC)),
+  normal(Color(0xFFFFE0CA)),
+  eletric(Color(0xFFFCF47C)),
+  ground(Color(0xFF9E6E53)),
+  fairy(Color(0xFFFDB7DA)),
   bug(Color(0xFFD0EC94)),
-  fighting(Color(0xFF1E1815)),
-  psychic(Color(0xFF6114BC)),
-  rock(Color(0xFF54473D)),
-  steel(Color(0xFF5D666E)),
-  ice(Color(0xFF8FC3E9)),
-  ghost(Color(0xFF8A8886)),
-  dark(Color(0xFF000000)),
-  dragon(Color(0xFF0804B4));
+  fighting(Color(0xFFB8B8B8)),
+  psychic(Color(0xFFA98DF8)),
+  rock(Color(0xFF9A8371)),
+  steel(Color(0xFF89A0B3)),
+  ice(Color(0xFFB7DBFF)),
+  ghost(Color(0xFFCDCDCD)),
+  dark(Color(0xFF8D8ECB)),
+  dragon(Color(0xFFAACBE1));
 
   final Color color;
 

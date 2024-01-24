@@ -134,10 +134,17 @@ class PokemonClip extends StatelessWidget {
                           */
                         },
                       ),
+                      const Padding(
+                        padding: EdgeInsets.only(top: 15, left: 140),
+                        child: Icon(
+                          Icons.favorite_border,
+                          size: 40,
+                        ),
+                      )
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
