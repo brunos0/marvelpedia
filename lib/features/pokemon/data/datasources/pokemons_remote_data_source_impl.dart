@@ -18,50 +18,57 @@ class PokemonsRemoteDataSourceImpl implements PokemonsRemoteDataSource {
 
   @override
   Future<PokemonsModel?> getPokemons() async {
-    final response = await client.get(
-        Uri.parse(
-            'https://pokeapi.co/api/v2/pokemon?offset=0&limit=20'), //9999999
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8',
-        });
-    if (response.statusCode == 200) {
-      final pkModel = PokemonsModel.fromJson(json.decode(response.body));
-      if (pkModel.step == 1) {
-        final listSize = pkModel.pokemons.length;
-        for (int i = 0; i < listSize; i++) {
-          final response = await client.get(
-              Uri.parse(
-                'https://pokeapi.co/api/v2/pokemon/${pkModel.pokemons[i].name.trim()}',
-              ),
-              headers: {
-                'Content-Type': 'application/json; charset=utf-8',
-              });
-          if (response.statusCode == 200) {
-            //
-            List<String> abilities;
-            List<Map<String, dynamic>> stats;
-            List<String> moves;
-            List<String> types;
-            double weight;
-            double height;
-            (abilities, stats, moves, weight, height, types) =
-                pkModel.detailsFromJson(json.decode(response.body));
-            pkModel.pokemons[i].abilities = abilities;
-            pkModel.pokemons[i].moves = moves;
-            pkModel.pokemons[i].weight = weight;
-            pkModel.pokemons[i].height = height;
-            pkModel.pokemons[i].types = types;
-            pkModel.pokemons[i].stats = stats;
-            pkModel.step = 2;
+    //
+    final box = di.sl<Box<Pokemons>>();
+    if (box.isEmpty) {
+      final response = await client.get(
+          Uri.parse(
+              'https://pokeapi.co/api/v2/pokemon?offset=0&limit=20'), //9999999
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+          });
+      if (response.statusCode == 200) {
+        final pkModel = PokemonsModel.fromJson(json.decode(response.body));
+        if (pkModel.step == 1) {
+          final listSize = pkModel.pokemons.length;
+          for (int i = 0; i < listSize; i++) {
+            final response = await client.get(
+                Uri.parse(
+                  'https://pokeapi.co/api/v2/pokemon/${pkModel.pokemons[i].name.trim()}',
+                ),
+                headers: {
+                  'Content-Type': 'application/json; charset=utf-8',
+                });
+            if (response.statusCode == 200) {
+              //
+              List<String> abilities;
+              List<Map<String, dynamic>> stats;
+              List<String> moves;
+              List<String> types;
+              double weight;
+              double height;
+              (abilities, stats, moves, weight, height, types) =
+                  pkModel.detailsFromJson(json.decode(response.body));
+              pkModel.pokemons[i].abilities = abilities;
+              pkModel.pokemons[i].moves = moves;
+              pkModel.pokemons[i].weight = weight;
+              pkModel.pokemons[i].height = height;
+              pkModel.pokemons[i].types = types;
+              pkModel.pokemons[i].stats = stats;
+              pkModel.step = 2;
+            }
           }
         }
-      }
-      final box = di.sl<Box<Pokemons>>();
-      box.add(pkModel);
 
-      return pkModel;
+        box.add(pkModel);
+
+        return pkModel;
+      } else {
+        throw (ServerException());
+      }
     } else {
-      throw (ServerException());
+      return PokemonsModel(
+          pokemons: di.sl<Box<Pokemons>>().getAt(0)!.pokemons, step: 1);
     }
   }
 }
