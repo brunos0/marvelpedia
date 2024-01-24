@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pocketpedia/injection_container.dart' as di;
 import 'package:pocketpedia/pages/pokemon_detail.dart';
 import 'package:pocketpedia/pages/pokemons_page.dart';
@@ -6,7 +8,7 @@ import 'package:pocketpedia/utils/app_routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await Hive.initFlutter();
   await di.init();
   runApp(const MyApp());
 }
