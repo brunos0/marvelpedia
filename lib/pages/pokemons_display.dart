@@ -16,7 +16,7 @@ class PokemonsDisplay extends StatelessWidget {
       child: Row(children: [
         SizedBox(
           width: 370,
-          height: 730,
+          height: 650,
           child: ListView.builder(
             //scrollDirection: Axis.horizontal,
             itemCount: pokemons.pokemons.length,
