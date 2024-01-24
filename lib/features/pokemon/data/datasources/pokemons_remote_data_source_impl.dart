@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:pocketpedia/core/error/exceptions.dart';
 import 'package:pocketpedia/features/pokemon/data/datasources/pokemons_remote_data_source.dart';
 import 'package:pocketpedia/features/pokemon/data/models/pokemons_model.dart';
+import 'package:pocketpedia/features/pokemon/domain/entities/pokemons.dart';
 import 'package:pocketpedia/injection_container.dart' as di;
 
 String tmdbApiKey = const String.fromEnvironment('API_KEY_TMDB');
@@ -55,8 +56,9 @@ class PokemonsRemoteDataSourceImpl implements PokemonsRemoteDataSource {
           }
         }
       }
-      final box = di.sl<Box<PokemonsModel>>();
+      final box = di.sl<Box<Pokemons>>();
       box.add(pkModel);
+
       return pkModel;
     } else {
       throw (ServerException());

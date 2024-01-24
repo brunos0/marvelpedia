@@ -30,10 +30,10 @@ Future<void> init() async {
   final directory = await getApplicationDocumentsDirectory();
   await Hive.initFlutter(directory.path);
   Hive.registerAdapter<Pokemons>(PokemonsAdapter());
-  Hive.registerAdapter<Pokemon>(
-      PokemonAdapter()); // Registre o adaptador para Pokemon aqui
-  final pokemonsBox = await openBox<PokemonsModel>('pokemons');
-  sl.registerSingleton<Box<PokemonsModel>>(pokemonsBox);
+  Hive.registerAdapter<Pokemon>(PokemonAdapter());
+  final pokemonsBox = await openBox<Pokemons>('pokemons');
+
+  sl.registerSingleton<Box<Pokemons>>(pokemonsBox);
   sl.registerSingleton<HiveInterface>(Hive);
 
 // Use Cases
