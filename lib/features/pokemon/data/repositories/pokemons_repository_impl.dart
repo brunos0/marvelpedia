@@ -1,7 +1,7 @@
 import 'package:pocketpedia/core/error/exceptions.dart';
 import 'package:pocketpedia/core/error/failures.dart';
 import 'package:pocketpedia/core/platfom/network_info.dart';
-import 'package:pocketpedia/features/pokemon/data/datasources/pokemons_remore_data_source.dart';
+import 'package:pocketpedia/features/pokemon/data/datasources/pokemons_remote_data_source.dart';
 import 'package:pocketpedia/features/pokemon/data/models/pokemons_model.dart';
 import 'package:pocketpedia/features/pokemon/repositories/pokemons_repository.dart';
 

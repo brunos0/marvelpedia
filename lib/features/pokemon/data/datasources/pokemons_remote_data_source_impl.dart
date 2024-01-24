@@ -1,10 +1,12 @@
 /* spell-checker: disable */
 
 import 'dart:convert';
+import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:pocketpedia/core/error/exceptions.dart';
-import 'package:pocketpedia/features/pokemon/data/datasources/pokemons_remore_data_source.dart';
+import 'package:pocketpedia/features/pokemon/data/datasources/pokemons_remote_data_source.dart';
 import 'package:pocketpedia/features/pokemon/data/models/pokemons_model.dart';
+import 'package:pocketpedia/injection_container.dart' as di;
 
 String tmdbApiKey = const String.fromEnvironment('API_KEY_TMDB');
 
@@ -29,7 +31,7 @@ class PokemonsRemoteDataSourceImpl implements PokemonsRemoteDataSource {
           final response = await client.get(
               Uri.parse(
                 'https://pokeapi.co/api/v2/pokemon/${pkModel.pokemons[i].name.trim()}',
-              ), //9999999
+              ),
               headers: {
                 'Content-Type': 'application/json; charset=utf-8',
               });
@@ -53,6 +55,8 @@ class PokemonsRemoteDataSourceImpl implements PokemonsRemoteDataSource {
           }
         }
       }
+      final box = di.sl<Box<PokemonsModel>>();
+      box.add(pkModel);
       return pkModel;
     } else {
       throw (ServerException());

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 import 'package:pocketpedia/features/pokemon/presentation/bloc/pokemons_bloc.dart';
 import 'package:pocketpedia/features/pokemon/presentation/bloc/pokemons_event.dart';
 import 'package:pocketpedia/features/pokemon/presentation/bloc/pokemons_state.dart';
@@ -120,5 +121,11 @@ class _PokemonsPageState extends State<PokemonsPage> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    Hive.close();
   }
 }

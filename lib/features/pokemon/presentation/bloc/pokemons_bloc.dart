@@ -16,9 +16,9 @@ class PokemonsBloc extends Bloc<PokemonsEvent, PokemonsState> {
     on<PokemonsEvent>((PokemonsEvent event, Emitter<PokemonsState> emit) async {
       if (event is GetPokemonsEvent) {
         emit(Loading());
-        final (movies, failure) = await getPokemons(NoParams());
+        final (pokemons, failure) = await getPokemons(NoParams());
 
-        _eitherLoadedOrErrorState(movies, failure, emit);
+        _eitherLoadedOrErrorState(pokemons, failure, emit);
       }
     });
   }
