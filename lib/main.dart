@@ -14,28 +14,7 @@ import 'features/pokemon/domain/entities/pokemons.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Create a box collection
-  final directory = await getApplicationDocumentsDirectory();
-  //await Hive.initFlutter();
-  await Hive.initFlutter(directory.path);
-  Hive.registerAdapter<Pokemons>(PokemonsAdapter());
-
-/*
-  final collection = await BoxCollection.open(
-      'Pokepedia', // Name of your database
-      {'pokemons'}, // Names of your boxes
-      path: directory.path
-      //     './', // Path where to store your boxes (Only used in Flutter / Dart IO)
-      //key: HiveCipher(), // Key to encrypt your boxes (Only used in Flutter / Dart IO)
-      );
-*/
   await di.init();
-  // Open your boxes. Optional: Give it a type.
-  // final pokemonsBox = collection.openBox<List<Pokemon>>('pokemons');
-
-  final pokemonsBox = await di.openBox<PokemonsModel>('pokemons');
-  di.sl.registerSingleton<Box<PokemonsModel>>(pokemonsBox);
-
   runApp(const MyApp());
 }
 
