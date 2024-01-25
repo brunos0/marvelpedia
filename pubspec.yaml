@@ -99,7 +99,12 @@ flutter:
     - assets/types/water.svg
     - assets/title.mp3
     - assets/loading.gif
-    
+    - assets/navbar/profile_on.png
+    - assets/navbar/profile_off.png
+    - assets/navbar/favorite_on.png
+    - assets/navbar/favorite_off.png
+    - assets/navbar/home_on.png
+    - assets/navbar/home_off.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

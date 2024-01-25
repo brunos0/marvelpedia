@@ -6,35 +6,64 @@ import 'package:pocketpedia/injection_container.dart' as di;
 
 class PokemonsDisplay extends StatelessWidget {
   PokemonsDisplay({
-    // required this.pokemons,
+    required this.favorites,
     super.key,
   });
 
+  final bool favorites;
   final Pokemons pokemons = di.sl<Box<Pokemons>>().getAt(0)!;
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      //scrollDirection: Axis.horizontal,
-      child: Row(children: [
-        SizedBox(
-          width: 370,
-          height: 650,
-          child: ListView.builder(
-            //scrollDirection: Axis.horizontal,
-            itemCount: pokemons.pokemons.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Center(
-                child: SizedBox(
-                    width: 370,
-                    height: 130,
-                    child: PokemonClip(
-                      index: index,
-                    )),
-              );
-            },
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    if (favorites) {
+      var result = pokemons.pokemons.any((pokemon) => pokemon.favorite == true);
+
+      if (!result) {
+        return const Center(
+          child: Text(
+            'Go ahead and favorite some Pokemon!',
           ),
-        ),
-      ]),
+        );
+      }
+    }
+
+    return SingleChildScrollView(
+      child: Row(
+        children: [
+          SizedBox(
+            width: width * 0.95,
+            height: height * 0.95,
+            child: ListView.builder(
+              itemCount: null,
+              itemBuilder: (BuildContext context, int index) {
+                final indexItem = index % pokemons.pokemons.length;
+                //if (indexItem < pokemons.pokemons.length) break ;
+                print(indexItem);
+                return !favorites
+                    ? SizedBox(
+                        width: width * 0.9,
+                        height: height * 0.15,
+                        child: PokemonClip(
+                          index: indexItem,
+                        ),
+                      )
+
+                    /// show only favorite ones
+                    : pokemons.pokemons[indexItem].favorite
+                        ? SizedBox(
+                            width: width * 0.9,
+                            height: height * 0.15,
+                            child: PokemonClip(
+                              index: indexItem,
+                            ),
+                          )
+                        : Container();
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

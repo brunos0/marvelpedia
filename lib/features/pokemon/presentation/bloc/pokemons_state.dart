@@ -13,6 +13,8 @@ class Loaded extends PokemonsState {}
 
 class Refresh extends PokemonsState {}
 
+class Profile extends PokemonsState {}
+
 class Error extends PokemonsState {
   Error({required this.message});
   final String message;

@@ -1,6 +1,3 @@
-//import 'package:assets_audio_player/assets_audio_player.dart';
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:just_audio/just_audio.dart';
@@ -21,9 +18,6 @@ class _LoadingWidgetState extends State<LoadingWidget> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      //Future.delayed(const Duration(seconds: 2));
-
-      // prevent audio when change pages
       await player.setAsset('assets/title.mp3');
       player.setLoopMode(LoopMode.one);
       player.play();

@@ -17,3 +17,10 @@ class RefreshEvent extends PokemonsEvent {
   @override
   List<Object?> get props => [];
 }
+
+class ProfileEvent extends PokemonsEvent {
+  ProfileEvent() : super([]);
+
+  @override
+  List<Object?> get props => [];
+}

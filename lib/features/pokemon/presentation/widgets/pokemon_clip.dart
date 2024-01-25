@@ -92,7 +92,8 @@ class PokemonClip extends StatelessWidget {
                       const Spacer(),
                       Text(
                         '#${pokemonNumber.padLeft(3, '0')}',
-                        style: TextStyle(fontSize: 14, fontFamily: 'ROBOTO'),
+                        style:
+                            const TextStyle(fontSize: 14, fontFamily: 'ROBOTO'),
                       ),
                       FittedBox(
                         fit: BoxFit.fill,

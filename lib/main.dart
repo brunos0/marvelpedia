@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:pocketpedia/features/pokemon/data/models/pokemons_model.dart';
-import 'package:pocketpedia/features/pokemon/domain/entities/pokemons.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pocketpedia/features/pokemon/presentation/bloc/pokemons_bloc.dart';
 import 'package:pocketpedia/injection_container.dart' as di;
+import 'package:pocketpedia/injection_container.dart';
 import 'package:pocketpedia/pages/pokemon_detail.dart';
-import 'package:pocketpedia/pages/pokemons_favorites.dart';
 import 'package:pocketpedia/pages/pokemons_page.dart';
-import 'package:pocketpedia/pages/profile.dart';
+
 import 'package:pocketpedia/utils/app_routes.dart';
 
 void main() async {
@@ -41,12 +39,13 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSwatch(
                 accentColor: Colors.green.shade600,
                 backgroundColor: Colors.white)),
-        home: const PokemonsPage(),
+        home: BlocProvider(
+            create: (_) => sl<PokemonsBloc>(),
+            // Top half
+            child: const PokemonsPage()),
         routes: {
           AppRoutes.pokemonPage: (ctx) => const PokemonsPage(),
           AppRoutes.pokemonDetail: (ctx) => PokemonDetail(),
-          AppRoutes.pokemonFavorites: (ctx) => const PokemonsFavorites(),
-          AppRoutes.profile: (ctx) => const Profile(),
         });
   }
 }
