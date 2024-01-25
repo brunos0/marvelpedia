@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pocketpedia/utils/app_routes.dart';
 
-void onItemTapped(int index, BuildContext context) {
+void onItemTapped(int index, int atualPage, BuildContext context) {
+  if (index == atualPage) {
+    return;
+  }
+
   switch (index) {
     case 0:
       Navigator.of(context).pushNamed(

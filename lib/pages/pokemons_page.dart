@@ -19,25 +19,12 @@ class PokemonsPage extends StatefulWidget {
 
 class _PokemonsPageState extends State<PokemonsPage> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1: Favoritos',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: Perfil',
-      style: optionStyle,
-    ),
-  ];
+  int atualPage = 0;
 
   void _onItemTapped(int index) {
-    nav.onItemTapped(index, context);
+    _selectedIndex = index;
+    //BlocProvider.of<PokemonsBloc>(context).add(RefreshEvent());
+    nav.onItemTapped(index, atualPage, context);
   }
 
   @override
@@ -121,6 +108,6 @@ class _PokemonsPageState extends State<PokemonsPage> {
   @override
   void dispose() {
     super.dispose();
-    Hive.close();
+    //Hive.close();
   }
 }

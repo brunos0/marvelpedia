@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
           AppRoutes.pokemonPage: (ctx) => const PokemonsPage(),
           AppRoutes.pokemonDetail: (ctx) => PokemonDetail(),
           AppRoutes.pokemonFavorites: (ctx) => const PokemonsFavorites(),
-          AppRoutes.profile: (ctx) => const Profile(),
+          AppRoutes.profile: (ctx) => Profile(),
         });
   }
 }

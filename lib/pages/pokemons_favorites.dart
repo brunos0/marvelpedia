@@ -18,26 +18,17 @@ class PokemonsFavorites extends StatefulWidget {
 }
 
 class _PokemonsFavoritesState extends State<PokemonsFavorites> {
-  int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1: Favoritos',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: Perfil',
-      style: optionStyle,
-    ),
-  ];
+  int _selectedIndex = 1;
+  int atualPage = 1;
 
   void _onItemTapped(int index) {
-    nav.onItemTapped(index, context);
+    /*
+    setState(() {
+      _selectedIndex = index;
+    });
+*/
+    //BlocProvider.of<PokemonsBloc>(context).add(RefreshEvent());
+    nav.onItemTapped(index, atualPage, context);
   }
 
   @override
@@ -49,17 +40,14 @@ class _PokemonsFavoritesState extends State<PokemonsFavorites> {
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: 'Home',
-              backgroundColor: Colors.red,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.business),
               label: 'Favoritos',
-              backgroundColor: Colors.green,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.school),
               label: 'Perfil',
-              backgroundColor: Colors.purple,
             ),
           ],
           currentIndex: _selectedIndex,
@@ -121,6 +109,6 @@ class _PokemonsFavoritesState extends State<PokemonsFavorites> {
   @override
   void dispose() {
     super.dispose();
-    Hive.close();
+    // Hive.close();
   }
 }
