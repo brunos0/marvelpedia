@@ -33,13 +33,14 @@ class PokemonAdapter extends TypeAdapter<Pokemon> {
       ..weakness = (fields[10] as List?)?.cast<String>()
       ..strengths = (fields[11] as List?)?.cast<String>()
       ..evolution = (fields[12] as List?)?.cast<String>()
-      ..moves = (fields[13] as List?)?.cast<String>();
+      ..moves = (fields[13] as List?)?.cast<String>()
+      ..favorite = fields[14] as bool;
   }
 
   @override
   void write(BinaryWriter writer, Pokemon obj) {
     writer
-      ..writeByte(14)
+      ..writeByte(15)
       ..writeByte(0)
       ..write(obj.number)
       ..writeByte(1)
@@ -67,7 +68,9 @@ class PokemonAdapter extends TypeAdapter<Pokemon> {
       ..writeByte(12)
       ..write(obj.evolution)
       ..writeByte(13)
-      ..write(obj.moves);
+      ..write(obj.moves)
+      ..writeByte(14)
+      ..write(obj.favorite);
   }
 
   @override

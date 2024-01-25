@@ -10,3 +10,10 @@ class GetPokemonsEvent extends PokemonsEvent {
   @override
   List<Object?> get props => [];
 }
+
+class RefreshEvent extends PokemonsEvent {
+  RefreshEvent() : super([]);
+
+  @override
+  List<Object?> get props => [];
+}

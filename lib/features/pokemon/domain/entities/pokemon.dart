@@ -4,7 +4,7 @@ import 'package:hive/hive.dart';
 part 'pokemon.g.dart';
 
 @HiveType(typeId: 2)
-class Pokemon extends Equatable {
+class Pokemon extends HiveObject with EquatableMixin {
   Pokemon({required this.number, required this.name});
 
   @HiveField(0)
@@ -35,6 +35,8 @@ class Pokemon extends Equatable {
   List<String>? evolution;
   @HiveField(13)
   List<String>? moves;
+  @HiveField(14)
+  bool favorite = false;
 
   @override
   List<Object?> get props => [
@@ -51,6 +53,7 @@ class Pokemon extends Equatable {
         strengths,
         stats,
         evolution,
-        moves
+        moves,
+        favorite,
       ];
 }

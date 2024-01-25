@@ -73,24 +73,4 @@ class PokemonsModel extends Pokemons {
 
     return (listAbilities, listStats, listMoves, weight, height, listTypes);
   }
-
-  // TODO(bruno): implements
-  Map<String, List<Map<String, String>>> toJson() {
-    List<Map<String, String>> moveItem = [];
-
-    int listSize = pokemons.length;
-    /*
-    for (int i = 0; i < listSize; i++) {
-      moveItem.add(
-        {
-          "originalTitle": movies[i].originalTitle,
-          "overview": movies[i].overview,
-          "urlCover": movies[i].urlCover
-        },
-      );
-    }
-    return {"result": moveItem};
-    */
-    return {"pokemons": []};
-  }
 }

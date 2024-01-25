@@ -20,6 +20,11 @@ class PokemonsBloc extends Bloc<PokemonsEvent, PokemonsState> {
 
         _eitherLoadedOrErrorState(pokemons, failure, emit);
       }
+
+      if (event is RefreshEvent) {
+        emit(Refresh());
+        emit(Loaded());
+      }
     });
   }
 
@@ -31,7 +36,7 @@ class PokemonsBloc extends Bloc<PokemonsEvent, PokemonsState> {
     if (failure != null) {
       emit(Error(message: _mapFailureToMessage(failure)));
     } else {
-      emit(Loaded(pokemons: pokemons!));
+      emit(Loaded(/*pokemons: pokemons!*/));
     }
   }
 

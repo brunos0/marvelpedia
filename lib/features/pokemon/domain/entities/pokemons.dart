@@ -5,7 +5,7 @@ import 'package:pocketpedia/features/pokemon/domain/entities/pokemon.dart';
 part 'pokemons.g.dart';
 
 @HiveType(typeId: 1)
-class Pokemons extends Equatable {
+class Pokemons extends HiveObject with EquatableMixin {
   Pokemons({
     required this.pokemons,
     this.step = 0,

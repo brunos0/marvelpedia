@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:pocketpedia/features/pokemon/domain/entities/pokemons.dart';
 
 abstract class PokemonsState extends Equatable {
   @override
@@ -10,13 +9,9 @@ class Empty extends PokemonsState {}
 
 class Loading extends PokemonsState {}
 
-class Loaded extends PokemonsState {
-  Loaded({required this.pokemons});
-  final Pokemons pokemons;
+class Loaded extends PokemonsState {}
 
-  @override
-  List<Object?> get props => [pokemons];
-}
+class Refresh extends PokemonsState {}
 
 class Error extends PokemonsState {
   Error({required this.message});

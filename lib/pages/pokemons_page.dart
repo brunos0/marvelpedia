@@ -43,37 +43,35 @@ class _PokemonsPageState extends State<PokemonsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: SafeArea(
-        child: Scaffold(
-          bottomNavigationBar: BottomNavigationBar(
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Home',
-                backgroundColor: Colors.red,
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.business),
-                label: 'Favoritos',
-                backgroundColor: Colors.green,
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.school),
-                label: 'Perfil',
-                backgroundColor: Colors.purple,
-              ),
-            ],
-            currentIndex: _selectedIndex,
-            selectedItemColor: const Color(0xFFF10A34),
-            onTap: _onItemTapped,
-          ),
-          body: Center(
-            child: Column(
-              children: <Widget>[
-                SingleChildScrollView(child: buildBody(context)),
-              ],
+    return SafeArea(
+      child: Scaffold(
+        bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+              backgroundColor: Colors.red,
             ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.business),
+              label: 'Favoritos',
+              backgroundColor: Colors.green,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.school),
+              label: 'Perfil',
+              backgroundColor: Colors.purple,
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: const Color(0xFFF10A34),
+          onTap: _onItemTapped,
+        ),
+        body: Center(
+          child: Column(
+            children: <Widget>[
+              SingleChildScrollView(child: buildBody(context)),
+            ],
           ),
         ),
       ),
@@ -101,9 +99,7 @@ class _PokemonsPageState extends State<PokemonsPage> {
                   } else if (state is Loading) {
                     return const LoadingWidget();
                   } else if (state is Loaded) {
-                    return PokemonsDisplay(
-                      pokemons: state.pokemons,
-                    );
+                    return PokemonsDisplay();
                   } else if (state is Error) {
                     return MessageDisplay(
                       message: state.message,

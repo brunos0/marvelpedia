@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
                 backgroundColor: Colors.white)),
         home: const PokemonsPage(),
         routes: {
-          AppRoutes.movieDetail: (ctx) => const PokemonDetail(),
+          AppRoutes.pokemonDetail: (ctx) => PokemonDetail(),
         });
   }
 }

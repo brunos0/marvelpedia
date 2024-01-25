@@ -1,18 +1,30 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:pocketpedia/features/pokemon/domain/entities/pokemons.dart';
+import 'package:pocketpedia/injection_container.dart' as di;
+import 'package:pocketpedia/utils/color_picker.dart';
 
 class PokemonDetail extends StatelessWidget {
-  const PokemonDetail({super.key});
+  PokemonDetail({super.key});
+
+  final Pokemons pokemons = di.sl<Box<Pokemons>>().getAt(0)!;
+  late String pokemonNumber;
+  late String pokemonName;
+  late List<String> pokemonTypes;
+  late bool favorite;
+  late List<Color> bgFadeColor;
 
   @override
   Widget build(BuildContext context) {
-    /*
-    final (movieName, movieDescription, moviePoster) = ModalRoute.of(context)!
-        .settings
-        .arguments as (String, String, String); //Map<String, dynamic>;
-*/
+    final index = ModalRoute.of(context)!.settings.arguments as int;
+    pokemonNumber = pokemons.pokemons[index].number;
+    pokemonName = pokemons.pokemons[index].name;
+    pokemonTypes = pokemons.pokemons[index].types!;
+    favorite = pokemons.pokemons[index].favorite;
+    bgFadeColor = colorTypeBGFadePicker(pokemonTypes[0]);
+
     return MaterialApp(
       home: SafeArea(
         child: DefaultTabController(
@@ -33,12 +45,9 @@ class PokemonDetail extends StatelessWidget {
                           child: Container(
                               height: 200,
                               width: 380,
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                 gradient: LinearGradient(
-                                  colors: [
-                                    Color(0xFFFCF47C),
-                                    Color(0xFFBC8905),
-                                  ],
+                                  colors: bgFadeColor,
                                   begin: Alignment.topCenter,
                                   end: Alignment.bottomCenter,
                                 ),
@@ -60,25 +69,30 @@ class PokemonDetail extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 60, right: 150),
-                          child: Transform(
-                            alignment: Alignment.center,
-                            transform: Matrix4.rotationY(math.pi),
-                            child: OverflowBox(
-                              maxHeight: 180,
-                              child: Image.network(
-                                'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png',
-                                //Image.asset(
-                                //  'assets/pikachu.png',
-                                //height: 200,
-                                //width: 200,
-                                //alignment: Alignment.bottomLeft,
-                                //fit: BoxFit.fill,
-
-                                //scale: 1,
+                        Container(
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 50, right: 150),
+                                  child: Transform(
+                                    alignment: Alignment.center,
+                                    transform: Matrix4.rotationY(math.pi),
+                                    child: OverflowBox(
+                                      maxHeight: 200,
+                                      child: pokemonNumber == '25'
+                                          ? Image.asset(
+                                              'assets/pikachu.png',
+                                            )
+                                          : Image.network(
+                                              'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$pokemonNumber.png',
+                                            ),
+                                    ),
+                                  ),
+                                ),
                               ),
-                            ),
+                            ],
                           ),
                         ),
                       ],

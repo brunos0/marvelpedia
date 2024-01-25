@@ -23,7 +23,7 @@ class PokemonsRemoteDataSourceImpl implements PokemonsRemoteDataSource {
     if (box.isEmpty) {
       final response = await client.get(
           Uri.parse(
-              'https://pokeapi.co/api/v2/pokemon?offset=0&limit=20'), //9999999
+              'https://pokeapi.co/api/v2/pokemon?offset=0&limit=30'), //9999999
           headers: {
             'Content-Type': 'application/json; charset=utf-8',
           });

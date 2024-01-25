@@ -1,4 +1,4 @@
 class AppRoutes {
   static const authOrHome = '/';
-  static const movieDetail = '/pokemon-detail';
+  static const pokemonDetail = '/pokemon-detail';
 }

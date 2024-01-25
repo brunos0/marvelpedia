@@ -1,19 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hive/hive.dart';
+import 'package:pocketpedia/features/pokemon/domain/entities/pokemons.dart';
+import 'package:pocketpedia/features/pokemon/presentation/bloc/pokemons_bloc.dart';
+import 'package:pocketpedia/features/pokemon/presentation/bloc/pokemons_event.dart';
 import 'package:pocketpedia/utils/app_routes.dart';
 import 'package:pocketpedia/utils/color_picker.dart';
 import 'package:pocketpedia/utils/string_extensions.dart';
+import 'package:pocketpedia/injection_container.dart' as di;
 
 class PokemonClip extends StatelessWidget {
-  const PokemonClip(
-      {required this.pokemonNumber,
+  PokemonClip(
+      {required this.index,
+      /*
+      required this.pokemonNumber,
       required this.pokemonName,
       required this.pokemonTypes,
+      */
       super.key});
+  final int index;
+  final Pokemons pokemons = di.sl<Box<Pokemons>>().getAt(0)!;
 
-  final String pokemonNumber;
-  final String pokemonName;
-  final List<String> pokemonTypes;
+  late String pokemonNumber;
+  late String pokemonName;
+  late List<String> pokemonTypes;
+  late bool favorite;
+  late ImageProvider image;
 
   List listTypes(List<String> list) {
     List tiles = [];
@@ -48,6 +61,18 @@ class PokemonClip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    pokemonNumber = pokemons.pokemons[index].number;
+    pokemonName = pokemons.pokemons[index].name;
+    pokemonTypes = pokemons.pokemons[index].types!;
+    favorite = pokemons.pokemons[index].favorite;
+
+    if (pokemonNumber == '25') {
+      image = AssetImage('assets/pikachu.png');
+    } else {
+      image = NetworkImage(
+          'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$pokemonNumber.png');
+    }
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ClipPath(
@@ -114,31 +139,47 @@ class PokemonClip extends StatelessWidget {
                               alignment: Alignment.bottomLeft,
                               height: 100,
                               width: 100,
-                              placeholder:
-
-                                  // TODO(bruno): se pikachu então imagem local
-                                  NetworkImage(
-                                      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$pokemonNumber.png'),
-                              image: NetworkImage(
-                                  'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$pokemonNumber.png'),
+                              placeholder: image,
+                              image: image,
                               fit: BoxFit.cover,
                             ),
                           ),
                         ),
                         onTap: () {
-                          /*
                           Navigator.of(context).pushNamed(
-                            AppRoutes.movieDetail,
-                            arguments: (movieName, movieDescription, moviePoster),
+                            AppRoutes.pokemonDetail,
+                            arguments: index,
                           );
-                          */
                         },
                       ),
-                      const Padding(
-                        padding: EdgeInsets.only(top: 15, left: 140),
-                        child: Icon(
-                          Icons.favorite_border,
-                          size: 40,
+                      Visibility(
+                        visible: favorite,
+                        child: const Padding(
+                          padding: EdgeInsets.only(top: 20, left: 150),
+                          child: Icon(
+                            Icons.favorite_outlined,
+                            color: Colors.red,
+                            size: 35,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10, left: 140),
+                        child: IconButton(
+                          icon: const Icon(Icons.favorite_border),
+                          onPressed: () {
+                            print("teste");
+                            pokemons.pokemons[index].favorite =
+                                !pokemons.pokemons[index].favorite;
+                            pokemons.save();
+
+                            BlocProvider.of<PokemonsBloc>(context)
+                                .add(RefreshEvent());
+                          },
+                          iconSize: 40,
+                          style: IconButton.styleFrom(
+                            elevation: 5,
+                          ),
                         ),
                       )
                     ],
