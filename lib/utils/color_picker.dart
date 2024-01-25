@@ -105,32 +105,76 @@ enum TypesBGFade {
     Color(0xFF70D090),
     Color(0xFF55A23A),
   ]),
-  //poison(Color(0xFFDDA1E7)),
+  poison([
+    Color(0xFFDCBEE1),
+    Color(0xFFDDA1E7),
+  ]),
   fire([
     Color(0xFFEBB753),
     Color(0xFFC60000),
   ]),
-  //flying(Color(0xFFAACBE1)),
+
+  flying([
+    Color(0xFFB2E1FF),
+    Color(0xFFAACBE1),
+  ]),
   water([
     Color(0xFF20C5F5),
     Color(0xFF157C9A),
   ]),
-  //normal(Color(0xFFFFE0CA)),
+  normal([
+    Color(0xFFFFF5EE),
+    Color(0xFFFFE0CA),
+  ]),
   electric([
     Color(0xFFFCF47C),
     Color(0xFFBC8905),
+  ]),
+  ground([
+    Color(0xFFDA9871),
+    Color(0xFF9E6E53),
+  ]),
+  fairy([
+    Color(0xFFFCD6E9),
+    Color(0xFFFDB7DA),
+  ]),
+  bug([
+    Color(0xFFE6FFB1),
+    Color(0xFFD0EC94),
+  ]),
+  fighting([
+    Color(0xFFD7D7D7),
+    Color(0xFFB8B8B8),
+  ]),
+  psychic([
+    Color(0xFFBBA5F7),
+    Color(0xFFA98DF8),
+  ]),
+  rock([
+    Color(0xFFCEAF97),
+    Color(0xFF9A8371),
+  ]),
+  steel([
+    Color(0xFF9ABBD7),
+    Color(0xFF89A0B3),
+  ]),
+  ice([
+    Color(0xFFBACEE1),
+    Color(0xFFB7DBFF),
+  ]),
+
+  ghost([
+    Color(0xFFF0DADA),
+    Color(0xFFCDCDCD),
+  ]),
+  dark([
+    Color(0xFFADAEE6),
+    Color(0xFF8D8ECB),
+  ]),
+  dragon([
+    Color(0xFFC8E7FC),
+    Color(0xFFAACBE1),
   ]);
-  //ground(Color(0xFF9E6E53)),
-  //fairy(Color(0xFFFDB7DA)),
-  //bug(Color(0xFFD0EC94)),
-  //fighting(Color(0xFFB8B8B8)),
-  //psychic(Color(0xFFA98DF8)),
-  //rock(Color(0xFF9A8371)),
-  //steel(Color(0xFF89A0B3)),
-  //ice(Color(0xFFB7DBFF)),
-  //ghost(Color(0xFFCDCDCD)),
-  //dark(Color(0xFF8D8ECB)),
-  //dragon(Color(0xFFAACBE1));
 
   final List<Color> color;
 
@@ -140,24 +184,27 @@ enum TypesBGFade {
 List<Color> colorTypeBGFadePicker(String type) {
   final result = switch (type) {
     'grass' => TypesBGFade.grass.color,
-    //'poison' => TypesBGFade.poison.color,
+    'poison' => TypesBGFade.poison.color,
     'fire' => TypesBGFade.fire.color,
-    //'flying' => TypesBGFade.flying.color,
+    'flying' => TypesBGFade.flying.color,
     'water' => TypesBGFade.water.color,
-    //'normal' => TypesBGFade.normal.color,
+    'normal' => TypesBGFade.normal.color,
     'electric' => TypesBGFade.electric.color,
-    //'ground' => TypesBGFade.ground.color,
-    //'fairy' => TypesBGFade.fairy.color,
-    //'bug' => TypesBGFade.bug.color,
-    //'fighting' => TypesBGFade.fighting.color,
-    //'psychic' => TypesBGFade.psychic.color,
-    //'rock' => TypesBGFade.rock.color,
-    //'steel' => TypesBGFade.steel.color,
-    //'ice' => TypesBGFade.ice.color,
-    //'ghost' => TypesBGFade.ghost.color,
-    //'dark' => TypesBGFade.dark.color,
-    //'dragon' => TypesBGFade.dragon.color,
-    _ => const [Color(0xFFFFFFFF), Color(0xFFFFFFFF)] //blank
+    'ground' => TypesBGFade.ground.color,
+    'fairy' => TypesBGFade.fairy.color,
+    'bug' => TypesBGFade.bug.color,
+    'fighting' => TypesBGFade.fighting.color,
+    'psychic' => TypesBGFade.psychic.color,
+    'rock' => TypesBGFade.rock.color,
+    'steel' => TypesBGFade.steel.color,
+    'ice' => TypesBGFade.ice.color,
+    'ghost' => TypesBGFade.ghost.color,
+    'dark' => TypesBGFade.dark.color,
+    'dragon' => TypesBGFade.dragon.color,
+    _ => const [
+        Color(0xFFFFFFFF),
+        Color(0xFFFFFFFF),
+      ] //blank
   };
   return result;
 }

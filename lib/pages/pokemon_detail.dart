@@ -1,10 +1,13 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:hive/hive.dart';
 import 'package:pocketpedia/features/pokemon/domain/entities/pokemons.dart';
+import 'package:pocketpedia/features/pokemon/presentation/widgets/pokemon_clip.dart';
 import 'package:pocketpedia/injection_container.dart' as di;
 import 'package:pocketpedia/utils/color_picker.dart';
+import 'package:pocketpedia/utils/string_extensions.dart';
 
 class PokemonDetail extends StatelessWidget {
   PokemonDetail({super.key});
@@ -24,6 +27,40 @@ class PokemonDetail extends StatelessWidget {
     pokemonTypes = pokemons.pokemons[index].types!;
     favorite = pokemons.pokemons[index].favorite;
     bgFadeColor = colorTypeBGFadePicker(pokemonTypes[0]);
+
+    List listTypes(List<String> list) {
+      List tiles = [];
+      for (int i = 0; i < list.length; i++) {
+        tiles.add(
+          ClipPath(
+            clipper: PKClipper(),
+            child: Container(
+              height: 20,
+              width: 60,
+              color: colorTypePicker(list[i]),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SvgPicture.asset('assets/types/${list[i]}.svg'),
+                  Text(
+                    list[i]
+                        .split(' ')
+                        .map((word) => word.capitalize())
+                        .join(' '),
+                    style: const TextStyle(
+                      fontSize: 10,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+        tiles.add(const Spacer(flex: 1));
+      }
+      return tiles;
+    }
 
     return MaterialApp(
       home: SafeArea(
@@ -55,7 +92,7 @@ class PokemonDetail extends StatelessWidget {
                         )),
                         SizedBox(
                           child: Opacity(
-                            opacity: 0.1,
+                            opacity: 0.05,
                             child: Align(
                               alignment: Alignment.bottomLeft,
                               child: Padding(
@@ -69,7 +106,8 @@ class PokemonDetail extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Container(
+                        SizedBox(
+                          width: 370,
                           child: Row(
                             children: [
                               Expanded(
@@ -93,6 +131,49 @@ class PokemonDetail extends StatelessWidget {
                                 ),
                               ),
                             ],
+                          ),
+                        ),
+                        Flexible(
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              left: 210,
+                              bottom: 10,
+                              top: 100,
+                            ),
+                            child: SizedBox(
+                              width: 130,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Spacer(),
+                                  Text(
+                                    '#${pokemonNumber.padLeft(3, '0')}',
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 14,
+                                        fontFamily: 'ROBOTO'),
+                                  ),
+                                  FittedBox(
+                                    fit: BoxFit.fill,
+                                    child: Text(
+                                      pokemonName
+                                          .split(' ')
+                                          .map((word) => word.capitalize())
+                                          .join(' '),
+                                      style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'ROBOTO'),
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  Row(children: [...listTypes(pokemonTypes)]),
+                                  const Spacer(),
+                                ],
+                              ),
+                            ),
                           ),
                         ),
                       ],
