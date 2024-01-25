@@ -5,7 +5,9 @@ import 'package:pocketpedia/features/pokemon/data/models/pokemons_model.dart';
 import 'package:pocketpedia/features/pokemon/domain/entities/pokemons.dart';
 import 'package:pocketpedia/injection_container.dart' as di;
 import 'package:pocketpedia/pages/pokemon_detail.dart';
+import 'package:pocketpedia/pages/pokemons_favorites.dart';
 import 'package:pocketpedia/pages/pokemons_page.dart';
+import 'package:pocketpedia/pages/profile.dart';
 import 'package:pocketpedia/utils/app_routes.dart';
 
 void main() async {
@@ -45,7 +47,10 @@ class MyApp extends StatelessWidget {
                 backgroundColor: Colors.white)),
         home: const PokemonsPage(),
         routes: {
+          AppRoutes.pokemonPage: (ctx) => const PokemonsPage(),
           AppRoutes.pokemonDetail: (ctx) => PokemonDetail(),
+          AppRoutes.pokemonFavorites: (ctx) => const PokemonsFavorites(),
+          AppRoutes.profile: (ctx) => const Profile(),
         });
   }
 }

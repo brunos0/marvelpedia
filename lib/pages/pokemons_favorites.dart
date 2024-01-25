@@ -7,17 +7,17 @@ import 'package:pocketpedia/features/pokemon/presentation/bloc/pokemons_state.da
 import 'package:pocketpedia/features/pokemon/presentation/widgets/loading_widget.dart';
 import 'package:pocketpedia/features/pokemon/presentation/widgets/message_display.dart';
 import 'package:pocketpedia/injection_container.dart';
-import 'package:pocketpedia/pages/pokemons_display.dart';
+import 'package:pocketpedia/pages/pokemons_favorites_display.dart';
 import 'package:pocketpedia/utils/navigator_controller.dart' as nav;
 
-class PokemonsPage extends StatefulWidget {
-  const PokemonsPage({super.key});
+class PokemonsFavorites extends StatefulWidget {
+  const PokemonsFavorites({super.key});
 
   @override
-  State<PokemonsPage> createState() => _PokemonsPageState();
+  State<PokemonsFavorites> createState() => _PokemonsFavoritesState();
 }
 
-class _PokemonsPageState extends State<PokemonsPage> {
+class _PokemonsFavoritesState extends State<PokemonsFavorites> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -98,7 +98,7 @@ class _PokemonsPageState extends State<PokemonsPage> {
                   } else if (state is Loading) {
                     return const LoadingWidget();
                   } else if (state is Loaded) {
-                    return PokemonsDisplay();
+                    return PokemonsFavoritesDisplay();
                   } else if (state is Error) {
                     return MessageDisplay(
                       message: state.message,
