@@ -1,21 +1,58 @@
-import 'package:flutter/material.dart';
+//import 'package:assets_audio_player/assets_audio_player.dart';
+import 'dart:async';
 
-class LoadingWidget extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:just_audio/just_audio.dart';
+
+class LoadingWidget extends StatefulWidget {
   const LoadingWidget({
     super.key,
   });
 
   @override
+  State<LoadingWidget> createState() => _LoadingWidgetState();
+}
+
+class _LoadingWidgetState extends State<LoadingWidget> {
+  AudioPlayer player = AudioPlayer();
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      //Future.delayed(const Duration(seconds: 2));
+
+      // prevent audio when change pages
+      await player.setAsset('assets/title.mp3');
+      player.setLoopMode(LoopMode.one);
+      player.play();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: MediaQuery.of(context).size.height / 3,
-      child: const Center(
+      child: Center(
           child: Column(
         children: [
-          Text('Retrieving Pokemons list from Prof Oak!\nPlease Wait!'),
-          CircularProgressIndicator(),
+          const Text('Retrieving Pokemons list from Prof Oak!'),
+          const Text('Please Wait!'),
+          const Gap(10),
+          Image.asset(
+            'assets/loading.gif',
+            height: 100,
+            width: 100,
+          )
         ],
       )),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    player.stop();
   }
 }

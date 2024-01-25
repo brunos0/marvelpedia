@@ -65,7 +65,7 @@ class PokemonDetail extends StatelessWidget {
     return MaterialApp(
       home: SafeArea(
         child: DefaultTabController(
-          initialIndex: 1,
+          initialIndex: 0,
           length: 4,
           child: Scaffold(
             body: Padding(
@@ -207,18 +207,12 @@ class PokemonDetail extends StatelessWidget {
                             color: Colors.grey,
                           ),
                           Container(
-                            //height: 300,
-                            //width: 300,
                             color: Colors.grey,
                           ),
                           Container(
-                            //height: 300,
-                            //width: 300,
                             color: Colors.grey,
                           ),
                           Container(
-                            //height: 300,
-                            //width: 300,
                             color: Colors.grey,
                           ),
                         ],

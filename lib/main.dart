@@ -12,11 +12,7 @@ import 'package:pocketpedia/utils/app_routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await di.init();
-
-  //final box = di.sl<Box<Pokemons>>();
-  //print(box.getAt(0));
   runApp(const MyApp());
 }
 
@@ -50,7 +46,7 @@ class MyApp extends StatelessWidget {
           AppRoutes.pokemonPage: (ctx) => const PokemonsPage(),
           AppRoutes.pokemonDetail: (ctx) => PokemonDetail(),
           AppRoutes.pokemonFavorites: (ctx) => const PokemonsFavorites(),
-          AppRoutes.profile: (ctx) => Profile(),
+          AppRoutes.profile: (ctx) => const Profile(),
         });
   }
 }

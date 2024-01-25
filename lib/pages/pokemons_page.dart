@@ -55,7 +55,12 @@ class _PokemonsPageState extends State<PokemonsPage> {
         ),
         body: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
+              const SizedBox(
+                height: 10,
+              ),
               SingleChildScrollView(child: buildBody(context)),
             ],
           ),
@@ -72,10 +77,13 @@ class _PokemonsPageState extends State<PokemonsPage> {
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              /*
               const SizedBox(
-                height: 10,
-              ),
+                  //height: 10,
+                  ),
+              */
               BlocBuilder<PokemonsBloc, PokemonsState>(
                 builder: (context, state) {
                   if (state is Empty) {

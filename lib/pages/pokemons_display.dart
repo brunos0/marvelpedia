@@ -27,13 +27,9 @@ class PokemonsDisplay extends StatelessWidget {
                 child: SizedBox(
                     width: 370,
                     height: 130,
-                    child: PokemonClip(index: index
-                        /*
-                        pokemonNumber: pokemons.pokemons[index].number,
-                        pokemonName: pokemons.pokemons[index].name,
-                        pokemonTypes: pokemons.pokemons[index].types!
-                        */
-                        )),
+                    child: PokemonClip(
+                      index: index,
+                    )),
               );
             },
           ),

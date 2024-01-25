@@ -12,14 +12,12 @@ class MessageDisplay extends StatelessWidget {
     return SizedBox(
       height: MediaQuery.of(context).size.height / 3,
       child: Center(
-        child: SingleChildScrollView(
-          child: Text(
-            message,
-            style: const TextStyle(
-              fontSize: 25,
-            ),
-            textAlign: TextAlign.center,
+        child: Text(
+          message,
+          style: const TextStyle(
+            fontSize: 25,
           ),
+          textAlign: TextAlign.center,
         ),
       ),
     );
