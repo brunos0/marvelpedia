@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pocketpedia/features/pokemon/presentation/bloc/details_bloc.dart';
 import 'package:pocketpedia/features/pokemon/presentation/bloc/pokemons_bloc.dart';
 import 'package:pocketpedia/injection_container.dart' as di;
 import 'package:pocketpedia/injection_container.dart';
@@ -39,8 +40,19 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSwatch(
                 accentColor: Colors.green.shade600,
                 backgroundColor: Colors.white)),
-        home: BlocProvider(
-            create: (_) => sl<PokemonsBloc>(),
+        home: MultiBlocProvider(
+            //
+            providers: [
+              BlocProvider<PokemonsBloc>(
+                // lazy: false,
+                create: (_) => sl<PokemonsBloc>(),
+              ),
+              BlocProvider<DetailsBloc>(
+                //lazy: false,
+                create: (_) => sl<DetailsBloc>(),
+              )
+            ],
+
             // Top half
             child: const PokemonsPage()),
         routes: {

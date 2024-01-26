@@ -10,6 +10,7 @@ import 'package:pocketpedia/features/pokemon/data/repositories/pokemons_reposito
 import 'package:pocketpedia/features/pokemon/domain/entities/pokemon.dart';
 import 'package:pocketpedia/features/pokemon/domain/entities/pokemons.dart';
 import 'package:pocketpedia/features/pokemon/domain/usecases/get_pokemons.dart';
+import 'package:pocketpedia/features/pokemon/presentation/bloc/details_bloc.dart';
 import 'package:pocketpedia/features/pokemon/presentation/bloc/pokemons_bloc.dart';
 import 'package:pocketpedia/features/pokemon/repositories/pokemons_repository.dart';
 
@@ -17,10 +18,10 @@ final sl = GetIt.instance;
 
 Future<void> init() async {
 // Bloc
-  sl.registerFactory(() => PokemonsBloc(
+  sl.registerFactory<PokemonsBloc>(() => PokemonsBloc(
         getPokemons: sl(),
       ));
-
+  sl.registerFactory<DetailsBloc>(() => DetailsBloc());
 // Register Hive
 
   final directory = await getApplicationDocumentsDirectory();

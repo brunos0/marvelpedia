@@ -64,12 +64,9 @@ class _PokemonsPageState extends State<PokemonsPage> {
           },
         ),
         body: SingleChildScrollView(
-          //padding: const EdgeInsets.symmetric(),
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Column(
-              //mainAxisAlignment: MainAxisAlignment.center,
-              //crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 BlocBuilder<PokemonsBloc, PokemonsState>(
                   builder: (context, state) {
@@ -105,12 +102,6 @@ class _PokemonsPageState extends State<PokemonsPage> {
       ),
     );
   }
-/*
-  BlocProvider<PokemonsBloc> buildBody(BuildContext context) {
-    return 
-  */
-
-  // }
 
   @override
   void dispose() {
