@@ -253,11 +253,10 @@ class _PokemonDetailState extends State<PokemonDetail> {
                                 child: IconButton(
                                   icon: const Icon(Icons.favorite_border),
                                   onPressed: () {
-                                    /*
                                     pokemons.pokemons[index].favorite =
                                         !pokemons.pokemons[index].favorite;
                                     pokemons.save();
-                                    */
+
                                     ScaffoldMessenger.of(context)
                                         .hideCurrentSnackBar();
                                     ScaffoldMessenger.of(context).showSnackBar(

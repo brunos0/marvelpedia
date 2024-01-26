@@ -150,10 +150,14 @@ class PokemonClip extends StatelessWidget {
                             ),
                           ),
                           onTap: () {
-                            Navigator.of(context).pushNamed(
-                              AppRoutes.pokemonDetail,
-                              arguments: index,
-                            );
+                            Navigator.of(context)
+                                .pushNamed(
+                                  AppRoutes.pokemonDetail,
+                                  arguments: index,
+                                )
+                                .then((_) =>
+                                    BlocProvider.of<PokemonsBloc>(context)
+                                        .add(RefreshEvent()));
                           },
                         ),
                         Visibility(
