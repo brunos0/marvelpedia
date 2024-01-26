@@ -12,7 +12,6 @@ import 'package:pocketpedia/features/pokemon/domain/entities/pokemons.dart';
 import 'package:pocketpedia/features/pokemon/domain/usecases/get_pokemons.dart';
 import 'package:pocketpedia/features/pokemon/presentation/bloc/pokemons_bloc.dart';
 import 'package:pocketpedia/features/pokemon/repositories/pokemons_repository.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 final sl = GetIt.instance;
 
@@ -51,9 +50,6 @@ Future<void> init() async {
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
 
 //! External
-  final SharedPreferences sharedPreferences =
-      await SharedPreferences.getInstance();
-  sl.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
   sl.registerLazySingleton(() => http.Client());
   sl.registerLazySingleton(() => InternetConnection());
 }

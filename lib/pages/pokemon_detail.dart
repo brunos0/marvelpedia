@@ -133,7 +133,7 @@ class PokemonDetail extends StatelessWidget {
                             ],
                           ),
                         ),
-                        Flexible(
+                        SizedBox(
                           child: Padding(
                             padding: const EdgeInsets.only(
                               left: 210,

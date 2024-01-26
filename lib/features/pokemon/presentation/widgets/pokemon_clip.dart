@@ -172,10 +172,22 @@ class PokemonClip extends StatelessWidget {
                           child: IconButton(
                             icon: const Icon(Icons.favorite_border),
                             onPressed: () {
-                              print("teste");
                               pokemons.pokemons[index].favorite =
                                   !pokemons.pokemons[index].favorite;
                               pokemons.save();
+
+                              ScaffoldMessenger.of(context)
+                                  .hideCurrentSnackBar();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: pokemons.pokemons[index].favorite
+                                      ? Text(
+                                          '${pokemons.pokemons[index].name} favoritado!')
+                                      : Text(
+                                          '${pokemons.pokemons[index].name} desfavoritado!'),
+                                  duration: const Duration(seconds: 2),
+                                ),
+                              );
 
                               BlocProvider.of<PokemonsBloc>(context)
                                   .add(RefreshEvent());

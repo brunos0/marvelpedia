@@ -17,30 +17,40 @@ class PokemonsPage extends StatefulWidget {
 
 class _PokemonsPageState extends State<PokemonsPage> {
   int _selectedIndex = 0;
+  final navBarKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
+          key: navBarKey,
+          items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: _selectedIndex == 0
+                  ? Image.asset('assets/navbar/home_on.png')
+                  : Image.asset('assets/navbar/home_off.png'),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.business),
+              icon: _selectedIndex == 1
+                  ? Image.asset('assets/navbar/favorite_on.png')
+                  : Image.asset('assets/navbar/favorite_off.png'),
               label: 'Favoritos',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.school),
+              icon: _selectedIndex == 2
+                  ? Image.asset('assets/navbar/profile_on.png')
+                  : Image.asset('assets/navbar/profile_off.png'),
               label: 'Perfil',
             ),
           ],
           currentIndex: _selectedIndex,
           selectedItemColor: const Color(0xFFF10A34),
           onTap: (index) {
-            _selectedIndex = index;
+            setState(() {
+              _selectedIndex = index;
+            });
 
             if (index == 2) {
               BlocProvider.of<PokemonsBloc>(context).add(
@@ -72,6 +82,7 @@ class _PokemonsPageState extends State<PokemonsPage> {
                     } else if (state is Loaded) {
                       return PokemonsDisplay(
                         favorites: _selectedIndex == 1 ? true : false,
+                        navBarKey: navBarKey,
                       );
                     } else if (state is Error) {
                       return MessageDisplay(

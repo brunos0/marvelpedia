@@ -8,16 +8,19 @@ import 'package:pocketpedia/injection_container.dart' as di;
 class PokemonsDisplay extends StatelessWidget {
   PokemonsDisplay({
     required this.favorites,
+    required this.navBarKey,
     super.key,
   });
 
   final bool favorites;
+  final GlobalKey navBarKey;
   final Pokemons pokemons = di.sl<Box<Pokemons>>().getAt(0)!;
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+
     if (favorites) {
       var result = pokemons.pokemons.any((pokemon) => pokemon.favorite == true);
 
@@ -28,10 +31,7 @@ class PokemonsDisplay extends StatelessWidget {
           ),
         );
       }
-      return FavoritesList(
-        width: width,
-        height: height,
-      );
+      return FavoritesList(width: width, height: height, navBarKey: navBarKey);
     } else {
       return CarouselList(
         width: width,
