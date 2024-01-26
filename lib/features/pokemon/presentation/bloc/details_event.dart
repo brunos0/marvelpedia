@@ -10,3 +10,10 @@ class DetailsRefreshEvent extends DetailsEvent {
   @override
   List<Object?> get props => [];
 }
+
+class DetailsLoadingEvent extends DetailsEvent {
+  DetailsLoadingEvent() : super([]);
+
+  @override
+  List<Object?> get props => [];
+}

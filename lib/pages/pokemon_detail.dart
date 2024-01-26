@@ -5,9 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hive/hive.dart';
-import 'package:pocketpedia/features/pokemon/data/datasources/pokemons_remote_data_source.dart';
+//import 'package:pocketpedia/features/pokemon/data/datasources/pokemons_remote_data_source.dart';
 import 'package:pocketpedia/features/pokemon/domain/entities/pokemons.dart';
-
 import 'package:pocketpedia/features/pokemon/presentation/bloc/details_bloc.dart';
 import 'package:pocketpedia/features/pokemon/presentation/bloc/details_event.dart';
 import 'package:pocketpedia/features/pokemon/presentation/bloc/details_state.dart';
@@ -26,13 +25,22 @@ class PokemonDetail extends StatefulWidget {
 
 class _PokemonDetailState extends State<PokemonDetail> {
   final Pokemons pokemons = di.sl<Box<Pokemons>>().getAt(0)!;
-  final _vm = di.sl<PokemonsRemoteDataSource>();
+  //final _vm = di.sl<PokemonsRemoteDataSource>();
   late int index;
   late String pokemonNumber;
   late String pokemonName;
+  late String pokemonHeight;
+  late String pokemonWeight;
+  late List<String> pokemonMoves;
   late List<String> pokemonTypes;
+  late List<String> pokemonAbilities;
+  late List<String> pokemonListEvolution;
+  late List<Map<String, dynamic>>? pokemonStats;
   late bool favorite;
   late List<Color> bgFadeColor;
+  String pokemonDescription = '';
+  String pokemonCategory = '';
+  String pokemonGender = '';
 
 /*
   @override
@@ -54,6 +62,7 @@ class _PokemonDetailState extends State<PokemonDetail> {
 */
   List listTypes(List<String> list) {
     List tiles = [];
+
     for (int i = 0; i < list.length; i++) {
       tiles.add(
         ClipPath(
@@ -83,23 +92,86 @@ class _PokemonDetailState extends State<PokemonDetail> {
     return tiles;
   }
 
-  Future<Record> getDetails() async {
-    return await _vm.getDetail(index);
+  List showStats() {
+    int statSize = pokemonStats!.length;
+    List stats = [];
+    int total = 0;
+    for (int i = 0; i < statSize; i++) {
+      String descr = pokemonStats![i].keys.first;
+      int value = pokemonStats![i][descr];
+      if (descr == 'hp') {
+        descr = 'HP';
+      }
+      if (descr == 'attack') {
+        descr = 'Attack';
+      }
+      if (descr == 'defense') {
+        descr = 'Defense';
+      }
+      if (descr == 'special-attack') {
+        descr = 'Sp. Atk';
+      }
+      if (descr == 'special-defense') {
+        descr = 'Sp. Def';
+      }
+      if (descr == 'speed') {
+        descr = 'Speed';
+      }
+
+      //pokemonStats![0].keys.first;
+      stats.add(
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              descr,
+            ),
+            const Gap(10),
+            Text(value.toString())
+          ],
+        ),
+      );
+      total += value;
+    }
+    stats.add(
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            'Total',
+          ),
+          const Gap(10),
+          Text(total.toString())
+        ],
+      ),
+    );
+    return stats;
+  }
+
+  List listMoves() {
+    List listMoves = [];
+    int sizeMoves = pokemonMoves.length;
+    for (int i = 0; i < sizeMoves; i++) {
+      listMoves.add(Text(pokemonMoves[i]));
+    }
+    return listMoves;
   }
 
   @override
   Widget build(BuildContext context) {
     index = ModalRoute.of(context)!.settings.arguments as int;
-    //var bloc = ModalRoute.of(context)!.settings.arguments as PokemonsBloc;//as (int, PokemonsBloc);
-
     pokemonNumber = pokemons.pokemons[index].number;
     pokemonName = pokemons.pokemons[index].name;
     pokemonTypes = pokemons.pokemons[index].types!;
     favorite = pokemons.pokemons[index].favorite;
+    pokemonHeight = pokemons.pokemons[index].height.toString();
+    pokemonWeight = pokemons.pokemons[index].weight.toString();
+    pokemonMoves = pokemons.pokemons[index].moves!;
+    pokemonStats = pokemons.pokemons[index].stats;
+    pokemonAbilities = pokemons.pokemons[index].abilities!;
     bgFadeColor = colorTypeBGFadePicker(pokemonTypes[0]);
-
-    //var Details = await _vm.getDetail(index);
-    getDetails();
 
     return MaterialApp(
       home: SafeArea(
@@ -109,21 +181,31 @@ class _PokemonDetailState extends State<PokemonDetail> {
           child: Scaffold(
             body: BlocProvider<DetailsBloc>(
               create: (_) => sl<DetailsBloc>(),
-              /*
-              BlocProvider<DetailsBloc>(
-                //lazy: false,
-                create: (_) => sl<DetailsBloc>(),
-              )
-              */
-
               child: Padding(
                 padding: const EdgeInsets.only(top: 30),
                 child: BlocBuilder<DetailsBloc, DetailsState>(
                   builder: (context, state) {
                     if (state is DetailsEmpty) {
                       BlocProvider.of<DetailsBloc>(context)
+                          .add(DetailsLoadingEvent());
+                      return const Center(child: CircularProgressIndicator());
+                    }
+
+                    if (state is DetailsLoaded) {
+                      var listEvolution;
+                      var description;
+                      var category;
+                      (listEvolution, description, category) =
+                          state.result as (List, String, String);
+
+                      pokemonListEvolution = listEvolution;
+                      pokemonCategory = category;
+                      pokemonDescription = description;
+
+                      BlocProvider.of<DetailsBloc>(context)
                           .add(DetailsRefreshEvent());
                     }
+
                     return Column(
                       children: [
                         SizedBox(
@@ -237,7 +319,12 @@ class _PokemonDetailState extends State<PokemonDetail> {
                               ),
 
                               Visibility(
-                                visible: favorite,
+                                visible: di
+                                    .sl<Box<Pokemons>>()
+                                    .getAt(0)!
+                                    .pokemons[index]
+                                    .favorite,
+                                //favorite,
                                 child: const Padding(
                                   padding: EdgeInsets.only(top: 20, left: 330),
                                   child: Icon(
@@ -309,13 +396,14 @@ class _PokemonDetailState extends State<PokemonDetail> {
                                 Center(
                                   child: Container(
                                     color: Colors.grey,
-                                    child: const Center(
+                                    child: Center(
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          Text("texto" /*teste.$2*/),
-                                          Gap(30),
+                                          const Text("Description"),
+                                          Text(pokemonDescription),
+                                          const Gap(30),
                                           Row(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.center,
@@ -324,27 +412,27 @@ class _PokemonDetailState extends State<PokemonDetail> {
                                             children: [
                                               Column(
                                                 children: [
-                                                  Text("Height"),
-                                                  Text("000"),
+                                                  const Text("Height"),
+                                                  Text(pokemonHeight),
                                                 ],
                                               ),
-                                              Gap(30),
+                                              const Gap(30),
                                               Column(
                                                 children: [
-                                                  Text("Weight"),
-                                                  Text("000"),
+                                                  const Text("Weight"),
+                                                  Text(pokemonWeight),
                                                 ],
                                               ),
-                                              Gap(30),
+                                              const Gap(30),
                                               Column(
                                                 children: [
-                                                  Text("Gender"),
-                                                  Text("???"),
+                                                  const Text("Gender"),
+                                                  Text(pokemonGender),
                                                 ],
                                               )
                                             ],
                                           ),
-                                          Gap(30),
+                                          const Gap(30),
                                           Row(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.center,
@@ -353,15 +441,15 @@ class _PokemonDetailState extends State<PokemonDetail> {
                                             children: [
                                               Column(
                                                 children: [
-                                                  Text("Catogory"),
-                                                  Text("???"),
+                                                  const Text("Category"),
+                                                  Text(pokemonCategory),
                                                 ],
                                               ),
-                                              Gap(30),
+                                              const Gap(30),
                                               Column(
                                                 children: [
-                                                  Text("Abilities"),
-                                                  Text("???"),
+                                                  const Text("Abilities"),
+                                                  Text(pokemonAbilities.first),
                                                 ],
                                               )
                                             ],
@@ -369,18 +457,36 @@ class _PokemonDetailState extends State<PokemonDetail> {
                                         ],
                                       ),
                                     ),
-                                    //height: 300,
-                                    //width: 300,
+                                  ),
+                                ),
+                                Center(
+                                  child: Container(
+                                    color: Colors.grey,
+                                    child: Center(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [...showStats()],
+                                      ),
+                                    ),
                                   ),
                                 ),
                                 Container(
                                   color: Colors.grey,
                                 ),
-                                Container(
-                                  color: Colors.grey,
-                                ),
-                                Container(
-                                  color: Colors.grey,
+                                Center(
+                                  child: SingleChildScrollView(
+                                    child: Container(
+                                      color: Colors.grey,
+                                      child: Center(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [...listMoves()],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),

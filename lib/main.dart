@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
             //
             providers: [
               BlocProvider<PokemonsBloc>(
-                // lazy: false,
+                //lazy: false,
                 create: (_) => sl<PokemonsBloc>(),
               ),
               BlocProvider<DetailsBloc>(
@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
             child: const PokemonsPage()),
         routes: {
           AppRoutes.pokemonPage: (ctx) => const PokemonsPage(),
-          AppRoutes.pokemonDetail: (ctx) => PokemonDetail(),
+          AppRoutes.pokemonDetail: (ctx) => const PokemonDetail(),
         });
   }
 }
