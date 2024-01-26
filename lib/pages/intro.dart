@@ -3,7 +3,6 @@ import 'package:video_player/video_player.dart';
 import '../utils/app_routes.dart';
 import 'dart:async';
 
-/// Stateful widget to fetch and then display video content.
 class Intro extends StatefulWidget {
   const Intro({super.key});
 
@@ -23,22 +22,8 @@ class IntroState extends State<Intro> {
           _controller.play();
         });
       }).then((value) => Timer(const Duration(seconds: 3), () {
-            /*
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const Login()),
-            );
-            */
             Navigator.of(context).pushReplacementNamed(AppRoutes.pokemonPage);
           }));
-
-    //Navigator.of(context).pushNamed(AppRoutes.login));
-    /*
-      .whenComplete(() {
-        print("FIIIIIIMMMMMMMMMMMMMMMMMM----------------------");
-        Navigator.of(context).pushNamed(AppRoutes.login);
-      });
-      */
   }
 
   @override
