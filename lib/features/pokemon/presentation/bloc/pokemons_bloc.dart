@@ -28,9 +28,12 @@ class PokemonsBloc extends Bloc<PokemonsEvent, PokemonsState> {
         if (event is RefreshEvent) {
           emit(Refresh());
           emit(Loaded());
+          return;
         } else if (event is ProfileEvent) {
           emit(Profile());
+          return;
         }
+        emit(Loaded());
       }
     });
   }

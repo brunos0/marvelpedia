@@ -53,45 +53,41 @@ class _PokemonsPageState extends State<PokemonsPage> {
             }
           },
         ),
-        body: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(),
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    BlocBuilder<PokemonsBloc, PokemonsState>(
-                      builder: (context, state) {
-                        if (state is Empty) {
-                          BlocProvider.of<PokemonsBloc>(context)
-                              .add(GetPokemonsEvent());
-                          return const MessageDisplay(message: 'Loading app!');
-                        } else if (state is Loading) {
-                          return const LoadingWidget();
-                        } else if (state is Loaded) {
-                          return PokemonsDisplay(
-                            favorites: _selectedIndex == 1 ? true : false,
-                          );
-                        } else if (state is Error) {
-                          return MessageDisplay(
-                            message: state.message,
-                          );
-                        } else if (state is Profile) {
-                          return const ProfileDisplay();
-                        } else {
-                          return Container();
-                        }
-                      },
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                  ],
+        body: SingleChildScrollView(
+          //padding: const EdgeInsets.symmetric(),
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              //mainAxisAlignment: MainAxisAlignment.center,
+              //crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                BlocBuilder<PokemonsBloc, PokemonsState>(
+                  builder: (context, state) {
+                    if (state is Empty) {
+                      BlocProvider.of<PokemonsBloc>(context)
+                          .add(GetPokemonsEvent());
+                      return const MessageDisplay(message: 'Loading app!');
+                    } else if (state is Loading) {
+                      return const LoadingWidget();
+                    } else if (state is Loaded) {
+                      return PokemonsDisplay(
+                        favorites: _selectedIndex == 1 ? true : false,
+                      );
+                    } else if (state is Error) {
+                      return MessageDisplay(
+                        message: state.message,
+                      );
+                    } else if (state is Profile) {
+                      return const ProfileDisplay();
+                    } else {
+                      return Container();
+                    }
+                  },
                 ),
-              ),
+                const SizedBox(
+                  height: 20,
+                ),
+              ],
             ),
           ),
         ),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:pocketpedia/features/pokemon/domain/entities/pokemons.dart';
-import 'package:pocketpedia/features/pokemon/presentation/widgets/pokemon_clip.dart';
+import 'package:pocketpedia/features/pokemon/presentation/widgets/carousel_list.dart';
+import 'package:pocketpedia/features/pokemon/presentation/widgets/favorites_list.dart';
 import 'package:pocketpedia/injection_container.dart' as di;
 
 class PokemonsDisplay extends StatelessWidget {
@@ -12,6 +13,7 @@ class PokemonsDisplay extends StatelessWidget {
 
   final bool favorites;
   final Pokemons pokemons = di.sl<Box<Pokemons>>().getAt(0)!;
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -26,44 +28,15 @@ class PokemonsDisplay extends StatelessWidget {
           ),
         );
       }
+      return FavoritesList(
+        width: width,
+        height: height,
+      );
+    } else {
+      return CarouselList(
+        width: width,
+        height: height,
+      );
     }
-
-    return SingleChildScrollView(
-      child: Row(
-        children: [
-          SizedBox(
-            width: width * 0.95,
-            height: height * 0.95,
-            child: ListView.builder(
-              itemCount: null,
-              itemBuilder: (BuildContext context, int index) {
-                final indexItem = index % pokemons.pokemons.length;
-                //if (indexItem < pokemons.pokemons.length) break ;
-                print(indexItem);
-                return !favorites
-                    ? SizedBox(
-                        width: width * 0.9,
-                        height: height * 0.15,
-                        child: PokemonClip(
-                          index: indexItem,
-                        ),
-                      )
-
-                    /// show only favorite ones
-                    : pokemons.pokemons[indexItem].favorite
-                        ? SizedBox(
-                            width: width * 0.9,
-                            height: height * 0.15,
-                            child: PokemonClip(
-                              index: indexItem,
-                            ),
-                          )
-                        : Container();
-              },
-            ),
-          ),
-        ],
-      ),
-    );
   }
 }

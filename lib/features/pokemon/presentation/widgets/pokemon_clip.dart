@@ -10,16 +10,16 @@ import 'package:pocketpedia/utils/color_picker.dart';
 import 'package:pocketpedia/utils/string_extensions.dart';
 import 'package:pocketpedia/injection_container.dart' as di;
 
+// ignore: must_be_immutable
 class PokemonClip extends StatelessWidget {
   PokemonClip(
-      {required this.index,
-      /*
-      required this.pokemonNumber,
-      required this.pokemonName,
-      required this.pokemonTypes,
-      */
+      {required this.width,
+      required this.height,
+      required this.index,
       super.key});
   final int index;
+  final double width;
+  final double height;
   final Pokemons pokemons = di.sl<Box<Pokemons>>().getAt(0)!;
 
   late String pokemonNumber;
@@ -67,127 +67,131 @@ class PokemonClip extends StatelessWidget {
     favorite = pokemons.pokemons[index].favorite;
 
     if (pokemonNumber == '25') {
-      image = AssetImage('assets/pikachu.png');
+      image = const AssetImage('assets/pikachu.png');
     } else {
       image = NetworkImage(
           'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$pokemonNumber.png');
     }
 
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ClipPath(
-        clipper: PKClipper(),
-        child: Container(
-          color: colorTypeBackgroundPicker(pokemonTypes[0]),
-          child: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 30, bottom: 10),
-                child: SizedBox(
-                  width: 130,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Spacer(),
-                      Text(
-                        '#${pokemonNumber.padLeft(3, '0')}',
-                        style:
-                            const TextStyle(fontSize: 14, fontFamily: 'ROBOTO'),
-                      ),
-                      FittedBox(
-                        fit: BoxFit.fill,
-                        child: Text(
-                          pokemonName
-                              .split(' ')
-                              .map((word) => word.capitalize())
-                              .join(' '),
+    return SizedBox(
+      width: width * 0.9,
+      height: height * 0.15,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ClipPath(
+          clipper: PKClipper(),
+          child: Container(
+            color: colorTypeBackgroundPicker(pokemonTypes[0]),
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 30, bottom: 10),
+                  child: SizedBox(
+                    width: 130,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Spacer(),
+                        Text(
+                          '#${pokemonNumber.padLeft(3, '0')}',
                           style: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'ROBOTO'),
+                              fontSize: 14, fontFamily: 'ROBOTO'),
                         ),
-                      ),
-                      const Spacer(),
-                      Row(children: [...listTypes(pokemonTypes)]),
-                      const Spacer(),
-                    ],
+                        FittedBox(
+                          fit: BoxFit.fill,
+                          child: Text(
+                            pokemonName
+                                .split(' ')
+                                .map((word) => word.capitalize())
+                                .join(' '),
+                            style: const TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'ROBOTO'),
+                          ),
+                        ),
+                        const Spacer(),
+                        Row(children: [...listTypes(pokemonTypes)]),
+                        const Spacer(),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                width: 190,
-                child: Container(
-                  child: Stack(
-                    children: [
-                      Opacity(
-                        opacity: 0.1,
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Image.asset('assets/pokeball.png',
-                              height: 140,
-                              width: 140,
-                              alignment: Alignment.centerRight,
-                              colorBlendMode: BlendMode.modulate),
-                        ),
-                      ),
-                      GestureDetector(
-                        child: Hero(
-                          tag: pokemonName,
+                SizedBox(
+                  width: 190,
+                  child: Container(
+                    child: Stack(
+                      children: [
+                        Opacity(
+                          opacity: 0.1,
                           child: Align(
-                            alignment: Alignment.bottomLeft,
-                            child: FadeInImage(
+                            alignment: Alignment.centerRight,
+                            child: Image.asset('assets/pokeball.png',
+                                height: 140,
+                                width: 140,
+                                alignment: Alignment.centerRight,
+                                colorBlendMode: BlendMode.modulate),
+                          ),
+                        ),
+                        GestureDetector(
+                          child: Hero(
+                            tag: pokemonName,
+                            child: Align(
                               alignment: Alignment.bottomLeft,
-                              height: 100,
-                              width: 100,
-                              placeholder: image,
-                              image: image,
-                              fit: BoxFit.cover,
+                              child: FadeInImage(
+                                alignment: Alignment.bottomLeft,
+                                height: 100,
+                                width: 100,
+                                placeholder: image,
+                                image: image,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          onTap: () {
+                            Navigator.of(context).pushNamed(
+                              AppRoutes.pokemonDetail,
+                              arguments: index,
+                            );
+                          },
+                        ),
+                        Visibility(
+                          visible: favorite,
+                          child: const Padding(
+                            padding: EdgeInsets.only(top: 20, left: 150),
+                            child: Icon(
+                              Icons.favorite_outlined,
+                              color: Colors.red,
+                              size: 35,
                             ),
                           ),
                         ),
-                        onTap: () {
-                          Navigator.of(context).pushNamed(
-                            AppRoutes.pokemonDetail,
-                            arguments: index,
-                          );
-                        },
-                      ),
-                      Visibility(
-                        visible: favorite,
-                        child: const Padding(
-                          padding: EdgeInsets.only(top: 20, left: 150),
-                          child: Icon(
-                            Icons.favorite_outlined,
-                            color: Colors.red,
-                            size: 35,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10, left: 140),
-                        child: IconButton(
-                          icon: const Icon(Icons.favorite_border),
-                          onPressed: () {
-                            print("teste");
-                            pokemons.pokemons[index].favorite =
-                                !pokemons.pokemons[index].favorite;
-                            pokemons.save();
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10, left: 140),
+                          child: IconButton(
+                            icon: const Icon(Icons.favorite_border),
+                            onPressed: () {
+                              print("teste");
+                              pokemons.pokemons[index].favorite =
+                                  !pokemons.pokemons[index].favorite;
+                              pokemons.save();
 
-                            BlocProvider.of<PokemonsBloc>(context)
-                                .add(RefreshEvent());
-                          },
-                          iconSize: 40,
-                          style: IconButton.styleFrom(
-                            elevation: 5,
+                              BlocProvider.of<PokemonsBloc>(context)
+                                  .add(RefreshEvent());
+                            },
+                            iconSize: 40,
+                            style: IconButton.styleFrom(
+                              elevation: 5,
+                            ),
                           ),
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
