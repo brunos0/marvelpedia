@@ -44,6 +44,7 @@ dependencies:
   gap: ^3.0.1
   just_audio: ^0.9.36
   carousel_slider: ^4.2.1
+  video_player: ^2.7.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -107,6 +108,7 @@ flutter:
     - assets/profile_pic.jpeg
     - assets/in.png
     - assets/git.jpeg
+    - assets/logo.mp4
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

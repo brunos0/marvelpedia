@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hive/hive.dart';
-//import 'package:pocketpedia/features/pokemon/data/datasources/pokemons_remote_data_source.dart';
 import 'package:pocketpedia/features/pokemon/domain/entities/pokemons.dart';
 import 'package:pocketpedia/features/pokemon/presentation/bloc/details_bloc.dart';
 import 'package:pocketpedia/features/pokemon/presentation/bloc/details_event.dart';
@@ -25,7 +24,6 @@ class PokemonDetail extends StatefulWidget {
 
 class _PokemonDetailState extends State<PokemonDetail> {
   final Pokemons pokemons = di.sl<Box<Pokemons>>().getAt(0)!;
-  //final _vm = di.sl<PokemonsRemoteDataSource>();
   late int index;
   late String pokemonNumber;
   late String pokemonName;
@@ -42,24 +40,6 @@ class _PokemonDetailState extends State<PokemonDetail> {
   String pokemonCategory = '';
   String pokemonGender = '';
 
-/*
-  @override
-  void initState() {
-    super.initState();
-
-    //var teste = _vm.getDetail(index);
-  }
-
-  @override
-  void didChangeDependencies() async {
-    WidgetsBinding.instance!.addPostFrameCallback((_) {});
-    //final index = ModalRoute.of(context)!.settings.arguments as int;
-
-    super.didChangeDependencies();
-    // var Details = await _vm.getDetail(index);
-    print("teste");
-  }
-*/
   List listTypes(List<String> list) {
     List tiles = [];
 
@@ -118,7 +98,6 @@ class _PokemonDetailState extends State<PokemonDetail> {
         descr = 'Speed';
       }
 
-      //pokemonStats![0].keys.first;
       stats.add(
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -213,9 +192,9 @@ class _PokemonDetailState extends State<PokemonDetail> {
                           child: Stack(
                             children: [
                               Center(
-                                  child: ClipPath(
-                                clipper: MyCustomClipper(),
-                                child: Container(
+                                child: ClipPath(
+                                  clipper: MyCustomClipper(),
+                                  child: Container(
                                     height: 200,
                                     width: 380,
                                     decoration: BoxDecoration(
@@ -224,8 +203,10 @@ class _PokemonDetailState extends State<PokemonDetail> {
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
                                       ),
-                                    )),
-                              )),
+                                    ),
+                                  ),
+                                ),
+                              ),
                               SizedBox(
                                 child: Opacity(
                                   opacity: 0.05,
@@ -308,9 +289,11 @@ class _PokemonDetailState extends State<PokemonDetail> {
                                           ),
                                         ),
                                         const Spacer(),
-                                        Row(children: [
-                                          ...listTypes(pokemonTypes)
-                                        ]),
+                                        Row(
+                                          children: [
+                                            ...listTypes(pokemonTypes)
+                                          ],
+                                        ),
                                         const Spacer(),
                                       ],
                                     ),
@@ -319,12 +302,17 @@ class _PokemonDetailState extends State<PokemonDetail> {
                               ),
 
                               Visibility(
-                                visible: di
+                                visible: pokemons.pokemons[index].favorite,
+
+                                /*
+                                di
                                     .sl<Box<Pokemons>>()
                                     .getAt(0)!
                                     .pokemons[index]
                                     .favorite,
                                 //favorite,
+                                
+                                */
                                 child: const Padding(
                                   padding: EdgeInsets.only(top: 20, left: 330),
                                   child: Icon(
@@ -387,7 +375,6 @@ class _PokemonDetailState extends State<PokemonDetail> {
                             ],
                           ),
                         ),
-
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -492,7 +479,6 @@ class _PokemonDetailState extends State<PokemonDetail> {
                             ),
                           ),
                         ),
-                        //
                       ],
                     );
                   },

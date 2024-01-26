@@ -14,6 +14,5 @@ class Strings {
       ' https://github.com/brunos0';
   static const String about_copyright_title = 'Copyright';
   static const String about_copyright_description =
-      '''All images contained in this application are \nthe property of Nintendo.\n'''
-      '''The application should not be commercialized \nand was developed solely for the purpose of studying the Flutter language.''';
+      '''All images contained in this application are \nthe property of Nintendo.\nThe application should not be commercialized \nand was developed solely for the purpose of studying the Flutter language.''';
 }

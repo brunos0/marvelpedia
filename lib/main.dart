@@ -4,6 +4,7 @@ import 'package:pocketpedia/features/pokemon/presentation/bloc/details_bloc.dart
 import 'package:pocketpedia/features/pokemon/presentation/bloc/pokemons_bloc.dart';
 import 'package:pocketpedia/injection_container.dart' as di;
 import 'package:pocketpedia/injection_container.dart';
+import 'package:pocketpedia/pages/intro.dart';
 import 'package:pocketpedia/pages/pokemon_detail.dart';
 import 'package:pocketpedia/pages/pokemons_page.dart';
 
@@ -40,21 +41,22 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSwatch(
                 accentColor: Colors.green.shade600,
                 backgroundColor: Colors.white)),
-        home: MultiBlocProvider(
+        home: Intro(),
+        /*
+        MultiBlocProvider(
             //
             providers: [
               BlocProvider<PokemonsBloc>(
-                //lazy: false,
+                lazy: false,
                 create: (_) => sl<PokemonsBloc>(),
               ),
               BlocProvider<DetailsBloc>(
-                //lazy: false,
+                lazy: false,
                 create: (_) => sl<DetailsBloc>(),
               )
             ],
-
-            // Top half
-            child: const PokemonsPage()),
+            child: const Intro()),
+        */
         routes: {
           AppRoutes.pokemonPage: (ctx) => const PokemonsPage(),
           AppRoutes.pokemonDetail: (ctx) => const PokemonDetail(),
