@@ -71,4 +71,32 @@ class PokemonsRemoteDataSourceImpl implements PokemonsRemoteDataSource {
           pokemons: di.sl<Box<Pokemons>>().getAt(0)!.pokemons, step: 1);
     }
   }
+
+  @override
+  Future<(List evolutions, String description, String genus)> getDetail(
+      int index) async {
+    final pokemonNumber = di.sl<Box<Pokemons>>().getAt(0)!.pokemons[3].number;
+    final response = await client.get(
+        Uri.parse(
+            'https://pokeapi.co/api/v2/pokemon-species/$pokemonNumber'), //9999999
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+        });
+    if (response.statusCode == 200) {
+      final result = json.decode(response.body);
+      final evolutionChain = result["evolution_chain"]["url"];
+      final evolutionChainId = evolutionChain
+          .split("https://pokeapi.co/api/v2/evolution-chain/")[1]
+          .replaceAll('/', '');
+      final description =
+          result['flavor_text_entries'][9]['flavor_text'] as String;
+      final category =
+          result['genera'][7]['genus'].replaceAll(' Pokémon', '') as String;
+      ;
+      print('teste');
+      return (['1', '2', '3'], description, category);
+    } else {
+      return ([], '', '');
+    }
+  }
 }

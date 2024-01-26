@@ -2,17 +2,25 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gap/gap.dart';
 import 'package:hive/hive.dart';
+import 'package:pocketpedia/features/pokemon/data/datasources/pokemons_remote_data_source.dart';
 import 'package:pocketpedia/features/pokemon/domain/entities/pokemons.dart';
 import 'package:pocketpedia/features/pokemon/presentation/widgets/pokemon_clip.dart';
 import 'package:pocketpedia/injection_container.dart' as di;
 import 'package:pocketpedia/utils/color_picker.dart';
 import 'package:pocketpedia/utils/string_extensions.dart';
 
-class PokemonDetail extends StatelessWidget {
+class PokemonDetail extends StatefulWidget {
   PokemonDetail({super.key});
 
+  @override
+  State<PokemonDetail> createState() => _PokemonDetailState();
+}
+
+class _PokemonDetailState extends State<PokemonDetail> {
   final Pokemons pokemons = di.sl<Box<Pokemons>>().getAt(0)!;
+  final _vm = di.sl<PokemonsRemoteDataSource>();
   late String pokemonNumber;
   late String pokemonName;
   late List<String> pokemonTypes;
@@ -20,14 +28,28 @@ class PokemonDetail extends StatelessWidget {
   late List<Color> bgFadeColor;
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
+
+    //var teste = _vm.getDetail(index);
+  }
+
+  @override
+  void didChangeDependencies() async {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {});
     final index = ModalRoute.of(context)!.settings.arguments as int;
     pokemonNumber = pokemons.pokemons[index].number;
     pokemonName = pokemons.pokemons[index].name;
     pokemonTypes = pokemons.pokemons[index].types!;
     favorite = pokemons.pokemons[index].favorite;
     bgFadeColor = colorTypeBGFadePicker(pokemonTypes[0]);
+    super.didChangeDependencies();
+    var Details = await _vm.getDetail(index);
+    print("teste");
+  }
 
+  @override
+  Widget build(BuildContext context) {
     List listTypes(List<String> list) {
       List tiles = [];
       for (int i = 0; i < list.length; i++) {
@@ -201,10 +223,71 @@ class PokemonDetail extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: TabBarView(
                         children: [
-                          Container(
-                            //height: 300,
-                            //width: 300,
-                            color: Colors.grey,
+                          Center(
+                            child: Container(
+                              color: Colors.grey,
+                              child: const Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text("texto" /*teste.$2*/),
+                                    Gap(30),
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Column(
+                                          children: [
+                                            Text("Height"),
+                                            Text("000"),
+                                          ],
+                                        ),
+                                        Gap(30),
+                                        Column(
+                                          children: [
+                                            Text("Weight"),
+                                            Text("000"),
+                                          ],
+                                        ),
+                                        Gap(30),
+                                        Column(
+                                          children: [
+                                            Text("Gender"),
+                                            Text("???"),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                    Gap(30),
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Column(
+                                          children: [
+                                            Text("Catogory"),
+                                            Text("???"),
+                                          ],
+                                        ),
+                                        Gap(30),
+                                        Column(
+                                          children: [
+                                            Text("Abilities"),
+                                            Text("???"),
+                                          ],
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                              //height: 300,
+                              //width: 300,
+                            ),
                           ),
                           Container(
                             color: Colors.grey,
