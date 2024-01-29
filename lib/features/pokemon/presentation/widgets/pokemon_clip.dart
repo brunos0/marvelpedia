@@ -5,6 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:pocketpedia/features/pokemon/domain/entities/pokemons.dart';
 import 'package:pocketpedia/features/pokemon/presentation/bloc/pokemons_bloc.dart';
 import 'package:pocketpedia/features/pokemon/presentation/bloc/pokemons_event.dart';
+import 'package:pocketpedia/features/pokemon/presentation/widgets/pkclipper.dart';
 import 'package:pocketpedia/utils/app_routes.dart';
 import 'package:pocketpedia/utils/color_picker.dart';
 import 'package:pocketpedia/utils/string_extensions.dart';
@@ -120,90 +121,87 @@ class PokemonClip extends StatelessWidget {
                 ),
                 SizedBox(
                   width: 190,
-                  child: Container(
-                    child: Stack(
-                      children: [
-                        Opacity(
-                          opacity: 0.1,
+                  child: Stack(
+                    children: [
+                      Opacity(
+                        opacity: 0.1,
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Image.asset('assets/pokeball.png',
+                              height: 140,
+                              width: 140,
+                              alignment: Alignment.centerRight,
+                              colorBlendMode: BlendMode.modulate),
+                        ),
+                      ),
+                      GestureDetector(
+                        child: Hero(
+                          tag: pokemonName,
                           child: Align(
-                            alignment: Alignment.centerRight,
-                            child: Image.asset('assets/pokeball.png',
-                                height: 140,
-                                width: 140,
-                                alignment: Alignment.centerRight,
-                                colorBlendMode: BlendMode.modulate),
-                          ),
-                        ),
-                        GestureDetector(
-                          child: Hero(
-                            tag: pokemonName,
-                            child: Align(
+                            alignment: Alignment.bottomLeft,
+                            child: FadeInImage(
                               alignment: Alignment.bottomLeft,
-                              child: FadeInImage(
-                                alignment: Alignment.bottomLeft,
-                                height: 100,
-                                width: 100,
-                                placeholder: image,
-                                image: image,
-                                fit: BoxFit.cover,
+                              height: 100,
+                              width: 100,
+                              placeholder: image,
+                              image: image,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        onTap: () {
+                          Navigator.of(context)
+                              .pushNamed(
+                                AppRoutes.pokemonDetail,
+                                arguments: index,
+                              )
+                              .then((_) =>
+                                  BlocProvider.of<PokemonsBloc>(context)
+                                      .add(RefreshEvent()));
+                        },
+                      ),
+                      Visibility(
+                        visible: favorite,
+                        child: const Padding(
+                          padding: EdgeInsets.only(top: 20, left: 150),
+                          child: Icon(
+                            Icons.favorite_outlined,
+                            color: Colors.red,
+                            size: 35,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10, left: 140),
+                        child: IconButton(
+                          icon: const Icon(Icons.favorite_border),
+                          onPressed: () {
+                            pokemons.pokemons[index].favorite =
+                                !pokemons.pokemons[index].favorite;
+                            pokemons.save();
+
+                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: pokemons.pokemons[index].favorite
+                                    ? Text(
+                                        '${pokemons.pokemons[index].name} favoritado!')
+                                    : Text(
+                                        '${pokemons.pokemons[index].name} desfavoritado!'),
+                                duration: const Duration(seconds: 2),
                               ),
-                            ),
-                          ),
-                          onTap: () {
-                            Navigator.of(context)
-                                .pushNamed(
-                                  AppRoutes.pokemonDetail,
-                                  arguments: index,
-                                )
-                                .then((_) =>
-                                    BlocProvider.of<PokemonsBloc>(context)
-                                        .add(RefreshEvent()));
+                            );
+
+                            BlocProvider.of<PokemonsBloc>(context)
+                                .add(RefreshEvent());
                           },
-                        ),
-                        Visibility(
-                          visible: favorite,
-                          child: const Padding(
-                            padding: EdgeInsets.only(top: 20, left: 150),
-                            child: Icon(
-                              Icons.favorite_outlined,
-                              color: Colors.red,
-                              size: 35,
-                            ),
+                          iconSize: 40,
+                          style: IconButton.styleFrom(
+                            elevation: 5,
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10, left: 140),
-                          child: IconButton(
-                            icon: const Icon(Icons.favorite_border),
-                            onPressed: () {
-                              pokemons.pokemons[index].favorite =
-                                  !pokemons.pokemons[index].favorite;
-                              pokemons.save();
-
-                              ScaffoldMessenger.of(context)
-                                  .hideCurrentSnackBar();
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: pokemons.pokemons[index].favorite
-                                      ? Text(
-                                          '${pokemons.pokemons[index].name} favoritado!')
-                                      : Text(
-                                          '${pokemons.pokemons[index].name} desfavoritado!'),
-                                  duration: const Duration(seconds: 2),
-                                ),
-                              );
-
-                              BlocProvider.of<PokemonsBloc>(context)
-                                  .add(RefreshEvent());
-                            },
-                            iconSize: 40,
-                            style: IconButton.styleFrom(
-                              elevation: 5,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
+                      )
+                    ],
                   ),
                 ),
               ],
@@ -213,20 +211,4 @@ class PokemonClip extends StatelessWidget {
       ),
     );
   }
-}
-
-class PKClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    var path = Path();
-    var rect = Rect.fromLTWH(0, 0, size.width, size.height);
-    path.addRRect(RRect.fromRectAndRadius(
-        rect,
-        const Radius.circular(
-            30.0))); // Ajuste o valor para alterar a curvatura
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }

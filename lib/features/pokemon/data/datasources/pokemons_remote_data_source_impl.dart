@@ -23,7 +23,7 @@ class PokemonsRemoteDataSourceImpl implements PokemonsRemoteDataSource {
     if (box.isEmpty) {
       final response = await client.get(
           Uri.parse(
-              'https://pokeapi.co/api/v2/pokemon?offset=0&limit=150'), //2000
+              'https://pokeapi.co/api/v2/pokemon?offset=0&limit=151'), //2000
           headers: {
             'Content-Type': 'application/json; charset=utf-8',
           });
@@ -75,7 +75,8 @@ class PokemonsRemoteDataSourceImpl implements PokemonsRemoteDataSource {
   @override
   Future<(List evolutions, String description, String genus)> getDetail(
       int index) async {
-    final pokemonNumber = di.sl<Box<Pokemons>>().getAt(0)!.pokemons[3].number;
+    final pokemonNumber =
+        di.sl<Box<Pokemons>>().getAt(0)!.pokemons[index].number;
     final response = await client.get(
         Uri.parse(
             'https://pokeapi.co/api/v2/pokemon-species/$pokemonNumber'), //9999999
@@ -92,8 +93,6 @@ class PokemonsRemoteDataSourceImpl implements PokemonsRemoteDataSource {
           result['flavor_text_entries'][9]['flavor_text'] as String;
       final category =
           result['genera'][7]['genus'].replaceAll(' Pokémon', '') as String;
-      ;
-
       return (['1', '2', '3'], description, category);
     } else {
       return ([], '', '');

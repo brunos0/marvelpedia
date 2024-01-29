@@ -12,8 +12,10 @@ class DetailsRefreshEvent extends DetailsEvent {
 }
 
 class DetailsLoadingEvent extends DetailsEvent {
-  DetailsLoadingEvent() : super([]);
+  DetailsLoadingEvent(this.pokemonNumber) : super([pokemonNumber]);
+
+  final int pokemonNumber;
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [pokemonNumber];
 }

@@ -17,19 +17,27 @@ class IntroState extends State<Intro> {
   void initState() {
     super.initState();
     _controller = VideoPlayerController.asset("assets/logo.mp4")
-      ..initialize().then((_) {
-        setState(() {
-          _controller.play();
-        });
-      }).then((value) => Timer(const Duration(seconds: 3), () {
+      ..initialize().then(
+        (_) {
+          setState(
+            () {
+              _controller.play();
+            },
+          );
+        },
+      ).then(
+        (value) => Timer(
+          const Duration(seconds: 3),
+          () {
             Navigator.of(context).pushReplacementNamed(AppRoutes.pokemonPage);
-          }));
+          },
+        ),
+      );
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Video Demo',
       home: Scaffold(
         body: Center(
           child: _controller.value.isInitialized
@@ -40,7 +48,6 @@ class IntroState extends State<Intro> {
               : Container(),
         ),
       ),
-      debugShowCheckedModeBanner: false,
     );
   }
 

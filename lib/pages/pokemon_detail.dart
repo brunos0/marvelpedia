@@ -9,6 +9,7 @@ import 'package:pocketpedia/features/pokemon/domain/entities/pokemons.dart';
 import 'package:pocketpedia/features/pokemon/presentation/bloc/details_bloc.dart';
 import 'package:pocketpedia/features/pokemon/presentation/bloc/details_event.dart';
 import 'package:pocketpedia/features/pokemon/presentation/bloc/details_state.dart';
+import 'package:pocketpedia/features/pokemon/presentation/widgets/pkclipper.dart';
 import 'package:pocketpedia/features/pokemon/presentation/widgets/pokemon_clip.dart';
 import 'package:pocketpedia/injection_container.dart' as di;
 import 'package:pocketpedia/injection_container.dart';
@@ -103,14 +104,46 @@ class _PokemonDetailState extends State<PokemonDetail> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              descr,
+            SizedBox(
+              width: 60,
+              child: Text(
+                descr,
+                textAlign: TextAlign.right,
+              ),
             ),
             const Gap(10),
-            Text(value.toString())
+            SizedBox(
+              width: 30,
+              child: Text(
+                value.toString(),
+                textAlign: TextAlign.right,
+              ),
+            ),
+            const Gap(10),
+            SizedBox(
+              width: 100,
+              child: ClipPath(
+                clipper: PKClipper(),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Expanded(
+                    flex: 2,
+                    child: Container(
+                      color: value >= 60
+                          ? const Color(0XFF0804B4)
+                          : const Color(0XFFF10A34),
+                      height: 10,
+                      width: value * 1.0,
+                      //alignment: Alignment.centerRight,
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       );
+      stats.add(const Gap(10));
       total += value;
     }
     stats.add(
@@ -118,11 +151,24 @@ class _PokemonDetailState extends State<PokemonDetail> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            'Total',
+          const SizedBox(
+            width: 60,
+            child: Text(
+              'Total',
+              textAlign: TextAlign.right,
+            ),
           ),
           const Gap(10),
-          Text(total.toString())
+          SizedBox(
+            width: 30,
+            child: Text(
+              total.toString(),
+              textAlign: TextAlign.right,
+            ),
+          ),
+          const SizedBox(
+            width: 100,
+          )
         ],
       ),
     );
@@ -166,7 +212,7 @@ class _PokemonDetailState extends State<PokemonDetail> {
                   builder: (context, state) {
                     if (state is DetailsEmpty) {
                       BlocProvider.of<DetailsBloc>(context)
-                          .add(DetailsLoadingEvent());
+                          .add(DetailsLoadingEvent(index));
                       return const Center(child: CircularProgressIndicator());
                     }
 
@@ -376,107 +422,103 @@ class _PokemonDetailState extends State<PokemonDetail> {
                           ),
                         ),
                         Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TabBarView(
-                              children: [
-                                Center(
-                                  child: Container(
-                                    color: Colors.grey,
-                                    child: Center(
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          const Text("Description"),
-                                          Text(pokemonDescription),
-                                          const Gap(30),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Column(
-                                                children: [
-                                                  const Text("Height"),
-                                                  Text(pokemonHeight),
-                                                ],
-                                              ),
-                                              const Gap(30),
-                                              Column(
-                                                children: [
-                                                  const Text("Weight"),
-                                                  Text(pokemonWeight),
-                                                ],
-                                              ),
-                                              const Gap(30),
-                                              Column(
-                                                children: [
-                                                  const Text("Gender"),
-                                                  Text(pokemonGender),
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                          const Gap(30),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Column(
-                                                children: [
-                                                  const Text("Category"),
-                                                  Text(pokemonCategory),
-                                                ],
-                                              ),
-                                              const Gap(30),
-                                              Column(
-                                                children: [
-                                                  const Text("Abilities"),
-                                                  Text(pokemonAbilities.first),
-                                                ],
-                                              )
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Center(
-                                  child: Container(
-                                    color: Colors.grey,
-                                    child: Center(
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [...showStats()],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  color: Colors.grey,
-                                ),
-                                Center(
-                                  child: SingleChildScrollView(
-                                    child: Container(
-                                      color: Colors.grey,
-                                      child: Center(
-                                        child: Column(
+                          child: TabBarView(
+                            children: [
+                              Center(
+                                child: Container(
+                                  color: const Color(0XFFF7F7F7),
+                                  child: Center(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        const Text("Description"),
+                                        Text(pokemonDescription),
+                                        const Gap(30),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
-                                          children: [...listMoves()],
+                                          children: [
+                                            Column(
+                                              children: [
+                                                const Text("Height"),
+                                                Text(pokemonHeight),
+                                              ],
+                                            ),
+                                            const Gap(30),
+                                            Column(
+                                              children: [
+                                                const Text("Weight"),
+                                                Text(pokemonWeight),
+                                              ],
+                                            ),
+                                            const Gap(30),
+                                            Column(
+                                              children: [
+                                                const Text("Gender"),
+                                                Text(pokemonGender),
+                                              ],
+                                            )
+                                          ],
                                         ),
+                                        const Gap(30),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Column(
+                                              children: [
+                                                const Text("Category"),
+                                                Text(pokemonCategory),
+                                              ],
+                                            ),
+                                            const Gap(30),
+                                            Column(
+                                              children: [
+                                                const Text("Abilities"),
+                                                Text(pokemonAbilities.first),
+                                              ],
+                                            )
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              //stats
+                              Container(
+                                color: const Color(0XFFF7F7F7),
+                                child: Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [...showStats()],
+                                  ),
+                                ),
+                              ),
+                              //evolutions
+                              Container(
+                                color: const Color(0XFFF7F7F7),
+                              ),
+                              Center(
+                                child: SingleChildScrollView(
+                                  child: Container(
+                                    color: const Color(0XFFF7F7F7),
+                                    child: Center(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [...listMoves()],
                                       ),
                                     ),
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ],

@@ -8,12 +8,13 @@ The application was developed with the aim of training the concepts of Hive, Blo
 
 ## Version  
 
+1.0.1 - Added Mew. Perform code cleaning. Fix Profile route.
 1.0 - Initial Release.
 
 ## TODO  
 
-Add Evolution Chains, Weak and Strength points 
-Improve detail screen to make its more readable 
-Fix favorite bug inside detail screen  
+Add Evolution Chains, Weak and Strength points  
+Improve detail screen to make its more readable  
+Fix favorite bug inside detail screen   
 
 ## Screenshots  
