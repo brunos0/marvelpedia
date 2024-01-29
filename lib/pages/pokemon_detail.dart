@@ -123,19 +123,19 @@ class _PokemonDetailState extends State<PokemonDetail> {
               width: 100,
               child: ClipPath(
                 clipper: PKClipper(),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Expanded(
-                    flex: 2,
-                    child: Container(
-                      color: value >= 60
-                          ? const Color(0XFF0804B4)
-                          : const Color(0XFFF10A34),
-                      height: 10,
-                      width: value * 1.0,
-                      //alignment: Alignment.centerRight,
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        color: value >= 60
+                            ? const Color(0XFF0804B4)
+                            : const Color(0XFFF10A34),
+                        height: 10,
+                        width: value * 1.0,
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ),
             ),
@@ -350,19 +350,8 @@ class _PokemonDetailState extends State<PokemonDetail> {
                                   ),
                                 ),
                               ),
-
                               Visibility(
                                 visible: pokemons.pokemons[index].favorite,
-
-                                /*
-                                di
-                                    .sl<Box<Pokemons>>()
-                                    .getAt(0)!
-                                    .pokemons[index]
-                                    .favorite,
-                                //favorite,
-                                
-                                */
                                 child: const Padding(
                                   padding: EdgeInsets.only(top: 20, left: 330),
                                   child: Icon(
@@ -405,7 +394,6 @@ class _PokemonDetailState extends State<PokemonDetail> {
                                   ),
                                 ),
                               )
-                              //aqui
                             ],
                           ),
                         ),
@@ -435,9 +423,9 @@ class _PokemonDetailState extends State<PokemonDetail> {
                           child: TabBarView(
                             children: [
                               //About
-                              Padding(
-                                padding: const EdgeInsets.all(15),
-                                child: Center(
+                              Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(30),
                                   child: Container(
                                     color: const Color(0XFFF7F7F7),
                                     child: Center(
@@ -445,7 +433,6 @@ class _PokemonDetailState extends State<PokemonDetail> {
                                         padding: const EdgeInsets.fromLTRB(
                                             60, 30, 60, 0),
                                         child: Column(
-                                          //mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             SizedBox(
                                               width: 300,
@@ -491,8 +478,6 @@ class _PokemonDetailState extends State<PokemonDetail> {
                                               padding:
                                                   const EdgeInsets.symmetric(),
                                               child: Row(
-                                                // crossAxisAlignment:
-                                                //     CrossAxisAlignment.center,
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
                                                         .spaceBetween,
@@ -510,9 +495,8 @@ class _PokemonDetailState extends State<PokemonDetail> {
                                                           .first),
                                                     ],
                                                   ),
-                                                  Column(children: [
-                                                    const Text("")
-                                                  ]),
+                                                  const Column(
+                                                      children: [Text("")]),
                                                 ],
                                               ),
                                             )
@@ -524,9 +508,9 @@ class _PokemonDetailState extends State<PokemonDetail> {
                                 ),
                               ),
                               //stats
-                              Padding(
-                                padding: const EdgeInsets.all(15),
-                                child: Center(
+                              Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(30),
                                   child: Container(
                                     color: const Color(0XFFF7F7F7),
                                     child: Center(
@@ -534,7 +518,6 @@ class _PokemonDetailState extends State<PokemonDetail> {
                                         padding: const EdgeInsets.fromLTRB(
                                             60, 30, 60, 0),
                                         child: Column(
-                                          //  mainAxisAlignment: MainAxisAlignment.center,
                                           children: [...showStats()],
                                         ),
                                       ),
@@ -543,9 +526,9 @@ class _PokemonDetailState extends State<PokemonDetail> {
                                 ),
                               ),
                               //evolutions
-                              Padding(
-                                padding: const EdgeInsets.all(15),
-                                child: Center(
+                              Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(30),
                                   child: Container(
                                       color: const Color(0XFFF7F7F7),
                                       child: const Center(
@@ -557,17 +540,20 @@ class _PokemonDetailState extends State<PokemonDetail> {
                                       )),
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(15),
-                                child: SingleChildScrollView(
-                                  child: Container(
-                                    color: const Color(0XFFF7F7F7),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [...listMoves()],
+                              //moves
+                              Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(30),
+                                  child: SingleChildScrollView(
+                                    child: Container(
+                                      color: const Color(0XFFF7F7F7),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [...listMoves()],
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -592,7 +578,7 @@ class MyCustomClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     var path = Path();
-    var radius = 40.0; // Ajuste o valor para alterar a curvatura
+    var radius = 40.0;
 
     path.moveTo(0, size.height - size.height * 0.75 + radius + 20);
     path.quadraticBezierTo(0, size.height - size.height * 0.75 + 20, radius,
