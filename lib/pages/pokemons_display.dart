@@ -26,8 +26,14 @@ class PokemonsDisplay extends StatelessWidget {
 
       if (!result) {
         return const Center(
-          child: Text(
-            'Go ahead and favorite some Pokemon!',
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                'Go ahead and favorite some Pokemon!',
+              ),
+            ],
           ),
         );
       }

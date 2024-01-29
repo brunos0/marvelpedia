@@ -26,27 +26,21 @@ class _LoadingWidgetState extends State<LoadingWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height / 3,
-      child: Padding(
-        padding: const EdgeInsets.all(50),
-        child: Center(
-            child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('Retrieving Pokemons list from Prof Oak!'),
-            const Text('Please Wait!'),
-            const Gap(10),
-            Image.asset(
-              'assets/loading.gif',
-              height: 100,
-              width: 100,
-            )
-          ],
-        )),
-      ),
-    );
+    return Center(
+        child: Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Text('Retrieving Pokemons list from Prof Oak!'),
+        const Text('Please Wait!'),
+        const Gap(10),
+        Image.asset(
+          'assets/loading.gif',
+          height: 100,
+          width: 100,
+        )
+      ],
+    ));
   }
 
   @override

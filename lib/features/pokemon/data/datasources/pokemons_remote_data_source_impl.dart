@@ -89,8 +89,8 @@ class PokemonsRemoteDataSourceImpl implements PokemonsRemoteDataSource {
       final evolutionChainId = evolutionChain
           .split("https://pokeapi.co/api/v2/evolution-chain/")[1]
           .replaceAll('/', '');
-      final description =
-          result['flavor_text_entries'][9]['flavor_text'] as String;
+      final description = result['flavor_text_entries'][9]['flavor_text']
+          .replaceAll('\n', ' ') as String;
       final category =
           result['genera'][7]['genus'].replaceAll(' Pokémon', '') as String;
       return (['1', '2', '3'], description, category);

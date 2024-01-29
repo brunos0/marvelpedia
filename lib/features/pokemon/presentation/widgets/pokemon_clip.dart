@@ -185,9 +185,9 @@ class PokemonClip extends StatelessWidget {
                               SnackBar(
                                 content: pokemons.pokemons[index].favorite
                                     ? Text(
-                                        '${pokemons.pokemons[index].name} favoritado!')
+                                        '${pokemons.pokemons[index].name} has been favorited!')
                                     : Text(
-                                        '${pokemons.pokemons[index].name} desfavoritado!'),
+                                        '${pokemons.pokemons[index].name}  has been unfavorited!'),
                                 duration: const Duration(seconds: 2),
                               ),
                             );

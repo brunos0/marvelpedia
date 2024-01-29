@@ -14,28 +14,30 @@ class CarouselList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: width,
-      height: height,
-      child: CarouselSlider.builder(
-        itemCount: pokemons.pokemons.length,
-        itemBuilder: (
-          BuildContext context,
-          int itemIndex,
-          int pageViewIndex,
-        ) {
-          return PokemonClip(
-            width: width,
-            height: height,
-            index: itemIndex,
-          );
-        },
-        options: CarouselOptions(
-          initialPage: 3,
-          enableInfiniteScroll: true,
-          reverse: false,
-          viewportFraction: 0.148,
-          scrollDirection: Axis.vertical,
+    return SingleChildScrollView(
+      child: SizedBox(
+        width: width,
+        height: height,
+        child: CarouselSlider.builder(
+          itemCount: pokemons.pokemons.length,
+          itemBuilder: (
+            BuildContext context,
+            int itemIndex,
+            int pageViewIndex,
+          ) {
+            return PokemonClip(
+              width: width,
+              height: height,
+              index: itemIndex,
+            );
+          },
+          options: CarouselOptions(
+            initialPage: 3,
+            enableInfiniteScroll: true,
+            reverse: false,
+            viewportFraction: 0.148,
+            scrollDirection: Axis.vertical,
+          ),
         ),
       ),
     );

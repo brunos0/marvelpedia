@@ -14,6 +14,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
           emit(DetailsLoaded(result: details!));
         }
         if (event is DetailsRefreshEvent) {
+          emit(DetailsEmpty());
           emit(DetailsRefresh());
         }
       },
