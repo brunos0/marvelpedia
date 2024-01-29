@@ -8,7 +8,7 @@ The application was developed with the aim of training the concepts of Hive, Blo
 
 ## Version  
 
-1.0.1 - Added Mew. Perform code cleaning. Fix some bugs!
+1.0.1 - Added Mew. Perform code cleaning. Fix some bugs!  
 1.0 - Initial Release - Only 150 pokemons ( First generation )
 
 ## TODO  
