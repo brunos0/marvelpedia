@@ -77,7 +77,8 @@ class HeroClip extends StatelessWidget {
     }
 */
     //dummy image
-    image = const AssetImage('assets/pikachu.png');
+    image = const NetworkImage(
+        'https://static.vecteezy.com/ti/vetor-gratis/p3/7725022-perfil-icone-ui-icon-vetor.jpg');
     return SizedBox(
       width: width * 0.9,
       height: height * 0.15,
@@ -127,6 +128,7 @@ class HeroClip extends StatelessWidget {
                   width: 190,
                   child: Stack(
                     children: [
+                      /*
                       Opacity(
                         opacity: 0.1,
                         child: Align(
@@ -138,6 +140,7 @@ class HeroClip extends StatelessWidget {
                               colorBlendMode: BlendMode.modulate),
                         ),
                       ),
+                      */
                       GestureDetector(
                         child: Hero(
                           tag: heroId,

@@ -42,7 +42,7 @@ class _HeroDetailState extends State<HeroDetail> {
   String heroDescription = '';
   //String pokemonCategory = '';
   //String pokemonGender = '';
-
+  /*
   List listTypes(List<String> list) {
     List tiles = [];
 
@@ -57,7 +57,7 @@ class _HeroDetailState extends State<HeroDetail> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                SvgPicture.asset('assets/types/${list[i]}.svg'),
+                //SvgPicture.asset('assets/types/${list[i]}.svg'),
                 Text(
                   list[i].split(' ').map((word) => word.capitalize()).join(' '),
                   style: const TextStyle(
@@ -74,7 +74,7 @@ class _HeroDetailState extends State<HeroDetail> {
     }
     return tiles;
   }
-
+  */
   /*
   List showStats() {
     int statSize = pokemonStats!.length;
@@ -293,15 +293,20 @@ class _HeroDetailState extends State<HeroDetail> {
                                           alignment: Alignment.center,
                                           transform: Matrix4.rotationY(math.pi),
                                           child: OverflowBox(
-                                            maxHeight: 200,
-                                            child: heroId == 25
+                                              maxHeight: 200,
+                                              child: Image.network(
+                                                  'https://static.vecteezy.com/ti/vetor-gratis/p3/7725022-perfil-icone-ui-icon-vetor.jpg')
+                                              /*
+                                            heroId == 25
                                                 ? Image.asset(
                                                     'assets/pikachu.png',
                                                   )
                                                 : Image.network(
                                                     'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$pokemonNumber.png',
                                                   ),
-                                          ),
+
+                                                  */
+                                              ),
                                         ),
                                       ),
                                     ),
