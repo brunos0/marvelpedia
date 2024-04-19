@@ -29,7 +29,7 @@ class IntroState extends State<Intro> {
         (value) => Timer(
           const Duration(seconds: 3),
           () {
-            Navigator.of(context).pushReplacementNamed(AppRoutes.pokemonPage);
+            Navigator.of(context).pushReplacementNamed(AppRoutes.heroPage);
           },
         ),
       );

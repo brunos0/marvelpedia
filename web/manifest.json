@@ -1,6 +1,6 @@
 {
-    "name": "pocketpedia",
-    "short_name": "pocketpedia",
+    "name": "marvelpedia",
+    "short_name": "marvelpedia",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

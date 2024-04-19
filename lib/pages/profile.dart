@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:pocketpedia/core/constants/string.dart';
+import 'package:marvelpedia/core/constants/string.dart';
 
 class ProfileDisplay extends StatefulWidget {
   const ProfileDisplay({super.key});

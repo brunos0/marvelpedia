@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
-import 'package:pocketpedia/core/error/failures.dart';
-import 'package:pocketpedia/features/pokemon/domain/entities/pokemons.dart';
+import 'package:marvelpedia/core/error/failures.dart';
+import 'package:marvelpedia/features/marvel_heroes/domain/entities/heroes.dart';
 
 abstract class UseCase<Type, Params> {
-  Future<(Pokemons?, Failure?)> call(Params params);
+  Future<(Heroes?, Failure?)> call(Params params);
 }
 
 class NoParams extends Equatable {
