@@ -14,8 +14,8 @@ class Hero extends HiveObject with EquatableMixin {
   @HiveField(2)
   String? description;
   @HiveField(3)
-  List<Set>? comics;
-  @HiveField(14)
+  List<Map>? comics;
+  @HiveField(4)
   bool favorite = false;
 
   @override

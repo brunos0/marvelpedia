@@ -23,11 +23,11 @@ class HeroDetail extends StatefulWidget {
 }
 
 class _HeroDetailState extends State<HeroDetail> {
-  final Heroes heros = di.sl<Box<Heroes>>().getAt(0)!;
+  final Heroes heroes = di.sl<Box<Heroes>>().getAt(0)!;
   late int index;
-  late String heroId;
+  late int heroId;
   late String heroName;
-  late List<Set> heroComics;
+  late List<Map> heroComics;
   /*
   late String pokemonHeight;
   late String pokemonWeight;
@@ -196,9 +196,9 @@ class _HeroDetailState extends State<HeroDetail> {
   @override
   Widget build(BuildContext context) {
     index = ModalRoute.of(context)!.settings.arguments as int;
-    heroId = heroes.heroes[index].number;
+    heroId = heroes.heroes[index].id;
     heroName = heroes.heroes[index].name;
-    heroComics = heroes.heroes[index].types!;
+    heroComics = heroes.heroes[index].comics!;
     favorite = heroes.heroes[index].favorite;
     /*
     pokemonHeight = pokemons.pokemons[index].height.toString();

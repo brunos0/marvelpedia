@@ -26,7 +26,7 @@ class HeroClip extends StatelessWidget {
 
   late int heroId;
   late String heroName;
-  late List<Set> heroComics;
+  late List<Map> heroComics;
   late bool favorite;
   late ImageProvider image;
 
