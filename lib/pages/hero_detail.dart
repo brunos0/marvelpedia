@@ -2,17 +2,17 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
+//import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hive/hive.dart';
 import 'package:marvelpedia/features/marvel_heroes/domain/entities/heroes.dart';
 import 'package:marvelpedia/features/marvel_heroes/presentation/bloc/details_bloc.dart';
 import 'package:marvelpedia/features/marvel_heroes/presentation/bloc/details_event.dart';
 import 'package:marvelpedia/features/marvel_heroes/presentation/bloc/details_state.dart';
-import 'package:marvelpedia/features/marvel_heroes/presentation/widgets/pkclipper.dart';
+//import 'package:marvelpedia/features/marvel_heroes/presentation/widgets/pkclipper.dart';
 import 'package:marvelpedia/injection_container.dart' as di;
 import 'package:marvelpedia/injection_container.dart';
-import 'package:marvelpedia/utils/color_picker.dart';
+//import 'package:marvelpedia/utils/color_picker.dart';
 import 'package:marvelpedia/utils/string_extensions.dart';
 
 class HeroDetail extends StatefulWidget {
@@ -68,7 +68,7 @@ class _HeroDetailState extends State<HeroDetail> {
               ],
             ),
           ),
-        ),
+      
       );
       tiles.add(const Spacer(flex: 1));
     }

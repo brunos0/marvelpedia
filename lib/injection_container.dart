@@ -37,9 +37,9 @@ Future<void> init() async {
   await Hive.initFlutter(directory.path);
   Hive.registerAdapter<Heroes>(HeroesAdapter());
   Hive.registerAdapter<Hero>(HeroAdapter());
-  final pokemonsBox = await openBox<Heroes>('heroes');
+  final heroesBox = await openBox<Heroes>('heroes');
 
-  sl.registerSingleton<Box<Heroes>>(pokemonsBox);
+  sl.registerSingleton<Box<Heroes>>(heroesBox);
   sl.registerSingleton<HiveInterface>(Hive);
 
 // Use Cases
