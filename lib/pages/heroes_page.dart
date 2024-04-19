@@ -28,20 +28,38 @@ class _HeroesPageState extends State<HeroesPage> {
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: _selectedIndex == 0
-                  ? Image.asset('assets/navbar/home_on.png')
-                  : Image.asset('assets/navbar/home_off.png'),
+                  ? const Icon(
+                      Icons.home_outlined,
+                      color: Colors.red,
+                    )
+                  : const Icon(
+                      Icons.home_outlined,
+                      color: Colors.black,
+                    ),
               label: 'Home',
             ),
             BottomNavigationBarItem(
               icon: _selectedIndex == 1
-                  ? Image.asset('assets/navbar/favorite_on.png')
-                  : Image.asset('assets/navbar/favorite_off.png'),
+                  ? const Icon(
+                      Icons.favorite_border,
+                      color: Colors.red,
+                    )
+                  : const Icon(
+                      Icons.favorite_border,
+                      color: Colors.black,
+                    ),
               label: 'Favoritos',
             ),
             BottomNavigationBarItem(
               icon: _selectedIndex == 2
-                  ? Image.asset('assets/navbar/profile_on.png')
-                  : Image.asset('assets/navbar/profile_off.png'),
+                  ? const Icon(
+                      Icons.person_outline_outlined,
+                      color: Colors.red,
+                    )
+                  : const Icon(
+                      Icons.person_outline_outlined,
+                      color: Colors.black,
+                    ),
               label: 'Perfil',
             ),
           ],

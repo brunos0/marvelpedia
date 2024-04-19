@@ -14,7 +14,7 @@ class HeroesModel extends Heroes {
 
     // TODO(bruno): implements
 
-    final List<dynamic> jsonList = json['results'];
+    final List<dynamic> jsonList = json['data']['results'];
     int listSize = jsonList.length;
 
     for (int i = 0; i < listSize; i++) {

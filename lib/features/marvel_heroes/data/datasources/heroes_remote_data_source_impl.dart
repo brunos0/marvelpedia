@@ -7,12 +7,13 @@ import 'package:marvelpedia/features/marvel_heroes/data/datasources/heroes_remot
 import 'package:marvelpedia/features/marvel_heroes/data/models/heroes_model.dart';
 import 'package:marvelpedia/features/marvel_heroes/domain/entities/heroes.dart';
 import 'package:marvelpedia/core/error/exceptions.dart';
-import 'package:marvelpedia/features/marvel_heroes/data/datasources/heroes_remote_data_source.dart';
-import 'package:marvelpedia/features/marvel_heroes/data/models/heroes_model.dart';
-import 'package:marvelpedia/features/marvel_heroes/domain/entities/heroes.dart';
+//import 'package:marvelpedia/features/marvel_heroes/data/datasources/heroes_remote_data_source.dart';
+//import 'package:marvelpedia/features/marvel_heroes/data/models/heroes_model.dart';
+//import 'package:marvelpedia/features/marvel_heroes/domain/entities/heroes.dart';
 import 'package:marvelpedia/injection_container.dart' as di;
 
-String tmdbApiKey = const String.fromEnvironment('API_KEY_TMDB');
+String publicKey = const String.fromEnvironment('PUBLIC_KEY');
+String hash = const String.fromEnvironment('HASH');
 
 class HeroesRemoteDataSourceImpl implements HeroesRemoteDataSource {
   const HeroesRemoteDataSourceImpl({required this.client});
@@ -24,21 +25,17 @@ class HeroesRemoteDataSourceImpl implements HeroesRemoteDataSource {
     //
     final box = di.sl<Box<Heroes>>();
     if (box.isEmpty) {
-      final response = await client.get(Uri.parse(''),
-          /*
-              'https://gateway.marvel.com:443/v1/public/characters?apikey=
-              21c85811356ee6d25c73d915dcbedf89
-              &hash=
-              d750e07c81adc67e293588dac6df2f51
-              &ts=1&limit=50&offset=0'),
-              */
-          //'https://pokeapi.co/api/v2/pokemon?offset=0&limit=151'), //2000
+      final response = await client.get(
+          Uri.parse(
+              '''https://gateway.marvel.com:443/v1/public/characters?apikey='''
+              '''$publicKey&hash=$hash&ts=1&limit=100&offset=0'''),
           headers: {
             'Content-Type': 'application/json; charset=utf-8',
           });
 
       if (response.statusCode == 200) {
         final mhModel = HeroesModel.fromJson(json.decode(response.body));
+        /*
         if (mhModel.step == 1) {
           final listSize = mhModel.heroes.length;
           for (int i = 0; i < listSize; i++) {
@@ -65,7 +62,7 @@ class HeroesRemoteDataSourceImpl implements HeroesRemoteDataSource {
             }
           }
         }
-
+        */
         box.add(mhModel);
 
         return mhModel;
