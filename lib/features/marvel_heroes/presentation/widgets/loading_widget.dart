@@ -31,11 +31,11 @@ class _LoadingWidgetState extends State<LoadingWidget> {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text('Retrieving Pokemons list from Prof Oak!'),
+        const Text('Retrieving Heroes list from Marvel Server!'),
         const Text('Please Wait!'),
         const Gap(10),
         Image.asset(
-          'assets/loading.gif',
+          'assets/marvel.gif',
           height: 100,
           width: 100,
         )

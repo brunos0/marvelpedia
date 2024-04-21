@@ -68,14 +68,7 @@ class HeroClip extends StatelessWidget {
     heroName = heroes.heroes[index].name;
     heroComics = heroes.heroes[index].comics!;
     favorite = heroes.heroes[index].favorite;
-    /*
-    if (pokemonNumber == '25') {
-      image = const AssetImage('assets/pikachu.png');
-    } else {
-      image = NetworkImage(
-          'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$pokemonNumber.png');
-    }
-*/
+
     //dummy image
     image = const NetworkImage(
         'https://static.vecteezy.com/ti/vetor-gratis/p3/7725022-perfil-icone-ui-icon-vetor.jpg');

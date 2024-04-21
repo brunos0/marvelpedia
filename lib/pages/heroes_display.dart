@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:marvelpedia/features/marvel_heroes/domain/entities/heroes.dart';
-import 'package:marvelpedia/features/marvel_heroes/presentation/widgets/carousel_list.dart';
+import 'package:marvelpedia/features/marvel_heroes/presentation/widgets/heroes_list.dart';
 import 'package:marvelpedia/features/marvel_heroes/presentation/widgets/favorites_list.dart';
 import 'package:marvelpedia/injection_container.dart' as di;
 
-class PokemonsDisplay extends StatelessWidget {
-  PokemonsDisplay({
+class HeroesDisplay extends StatelessWidget {
+  HeroesDisplay({
     required this.favorites,
     required this.navBarKey,
     super.key,
@@ -22,7 +22,7 @@ class PokemonsDisplay extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
 
     if (favorites) {
-      var result = heroes.heroes.any((pokemon) => pokemon.favorite == true);
+      var result = heroes.heroes.any((hero) => hero.favorite == true);
 
       if (!result) {
         return const Center(
@@ -39,7 +39,7 @@ class PokemonsDisplay extends StatelessWidget {
       }
       return FavoritesList(width: width, height: height, navBarKey: navBarKey);
     } else {
-      return CarouselList(
+      return HeroesList(
         width: width,
         height: height,
       );

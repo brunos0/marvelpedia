@@ -85,13 +85,13 @@ class _HeroesPageState extends State<HeroesPage> {
           builder: (context, state) {
             if (state is Empty) {
               BlocProvider.of<HeroesBloc>(context).add(
-                GetHeroesEvent(),
+                GetHeroesEvent(increment: false),
               );
               return const MessageDisplay(message: 'Loading app!');
             } else if (state is Loading) {
               return const LoadingWidget();
             } else if (state is Loaded) {
-              return PokemonsDisplay(
+              return HeroesDisplay(
                 favorites: _selectedIndex == 1 ? true : false,
                 navBarKey: navBarKey,
               );

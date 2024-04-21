@@ -13,13 +13,13 @@ class HeroesRepositoryImpl implements HeroesRepository {
   final NetworkInfo networkInfo;
 
   @override
-  Future<(HeroesModel?, Failure?)> getHeroes() async {
+  Future<(HeroesModel?, Failure?)> getHeroes(increment) async {
     bool isConnected = await networkInfo.isConnected;
     if (isConnected) {
       try {
-        final pokemonsModel = await remoteDataSource.getHeroes();
+        final heroesModel = await remoteDataSource.getHeroes(increment);
 
-        return (pokemonsModel, null);
+        return (heroesModel, null);
       } on ServerException {
         return (null, ServerFailure());
       }

@@ -5,10 +5,12 @@ abstract class HeroesEvent extends Equatable {
 }
 
 class GetHeroesEvent extends HeroesEvent {
-  GetHeroesEvent() : super([]);
+  GetHeroesEvent({required this.increment}) : super([]);
+
+  bool increment;
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [increment];
 }
 
 class RefreshEvent extends HeroesEvent {

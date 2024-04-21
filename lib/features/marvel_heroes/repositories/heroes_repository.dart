@@ -4,5 +4,5 @@ import 'package:marvelpedia/features/marvel_heroes/domain/entities/heroes.dart';
 abstract class HeroesRepository {
   HeroesRepository();
 
-  Future<(Heroes?, Failure?)> getHeroes();
+  Future<(Heroes?, Failure?)> getHeroes(bool increment);
 }

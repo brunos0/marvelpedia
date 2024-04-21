@@ -21,14 +21,19 @@ class HeroesRemoteDataSourceImpl implements HeroesRemoteDataSource {
   final http.Client client;
 
   @override
-  Future<HeroesModel?> getHeroes() async {
+  Future<HeroesModel?> getHeroes(bool increment) async {
     //
     final box = di.sl<Box<Heroes>>();
-    if (box.isEmpty) {
+    if (box.isEmpty || increment) {
+      int offsetHero = 0;
+
+      if (increment) {
+        offsetHero = di.sl<Box<Heroes>>().getAt(0)!.heroes.length + 100;
+      }
       final response = await client.get(
           Uri.parse(
               '''https://gateway.marvel.com:443/v1/public/characters?apikey='''
-              '''$publicKey&hash=$hash&ts=1&limit=100&offset=0'''),
+              '''$publicKey&hash=$hash&ts=1&limit=100&offset=$offsetHero'''),
           headers: {
             'Content-Type': 'application/json; charset=utf-8',
           });
@@ -63,7 +68,11 @@ class HeroesRemoteDataSourceImpl implements HeroesRemoteDataSource {
           }
         }
         */
-        box.add(mhModel);
+        if (increment) {
+          box.getAt(0)!.heroes.addAll(mhModel.heroes);
+        } else {
+          box.add(mhModel);
+        }
 
         return mhModel;
       } else {

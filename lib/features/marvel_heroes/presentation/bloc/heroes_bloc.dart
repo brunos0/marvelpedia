@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:marvelpedia/core/error/failures.dart';
-import 'package:marvelpedia/core/usecases/usecase.dart';
+//import 'package:marvelpedia/core/usecases/usecase.dart';
 import 'package:marvelpedia/features/marvel_heroes/domain/entities/heroes.dart';
 import 'package:marvelpedia/features/marvel_heroes/domain/usecases/get_heroes.dart';
 import 'package:marvelpedia/features/marvel_heroes/presentation/bloc/heroes_event.dart';
@@ -17,13 +17,14 @@ class HeroesBloc extends Bloc<HeroesEvent, HeroesState> {
   }) : super(Empty()) {
     on<HeroesEvent>((HeroesEvent event, Emitter<HeroesState> emit) async {
       final box = di.sl<Box<Heroes>>();
-      if (box.isEmpty) {
-        if (event is GetHeroesEvent) {
-          emit(Loading());
-          final (heroes, failure) = await getHeroes(NoParams());
 
-          _eitherLoadedOrErrorState(heroes, failure, emit);
-        }
+      if (event is GetHeroesEvent) {
+        //if (box.isEmpty) {
+        emit(Loading());
+        final (heroes, failure) = await getHeroes(event.increment);
+
+        _eitherLoadedOrErrorState(heroes, failure, emit);
+        // }
       } else {
         if (event is RefreshEvent) {
           emit(Refresh());
