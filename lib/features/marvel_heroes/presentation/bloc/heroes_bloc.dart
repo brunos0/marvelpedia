@@ -19,7 +19,10 @@ class HeroesBloc extends Bloc<HeroesEvent, HeroesState> {
       final box = di.sl<Box<Heroes>>();
 
       if (event is GetHeroesEvent) {
-        //if (box.isEmpty) {
+        // //if (box.isEmpty) {
+        // if (!event.increment) {
+        //   emit(Loading());
+        // }
         emit(Loading());
         final (heroes, failure) = await getHeroes(event.increment);
 

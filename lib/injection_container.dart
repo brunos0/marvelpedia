@@ -25,7 +25,7 @@ Future<void> init() async {
         getHeroes: sl(),
       ));
 
-  int value = 0;
+  //int value = 0;
   sl.registerFactory<DetailsBloc>(
     () => DetailsBloc(
       getDetails: sl(),

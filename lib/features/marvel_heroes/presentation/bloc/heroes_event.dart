@@ -7,7 +7,7 @@ abstract class HeroesEvent extends Equatable {
 class GetHeroesEvent extends HeroesEvent {
   GetHeroesEvent({required this.increment}) : super([]);
 
-  bool increment;
+  final bool increment;
 
   @override
   List<Object?> get props => [increment];

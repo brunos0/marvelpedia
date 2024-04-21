@@ -20,14 +20,10 @@ class HeroesModel extends Heroes {
     for (int i = 0; i < listSize; i++) {
       heroes.add(Hero(
           id: jsonList[i]['id'],
-          /*
-        '${jsonList[i]['url'].split('https://pokeapi.co/api/v2/pokemon/')[1].replaceAll('/', '')
-            //.replaceAll('\'', '')
-            }',
-            */
           name: '${jsonList[i]['name']}',
-          // fix this
-          comics: [] //'${jsonList[i]['comics']}',
+          profilePicture:
+              '${jsonList[i]['thumbnail']['path']}.${jsonList[i]['thumbnail']['extension']}',
+          comics: [] //'${jsonList[i]['comics']['items'][name]}}'},
           ));
     }
 

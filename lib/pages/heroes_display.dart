@@ -31,7 +31,7 @@ class HeroesDisplay extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'Go ahead and favorite some Pokemon!',
+                'Go ahead and favorite some Hero!',
               ),
             ],
           ),

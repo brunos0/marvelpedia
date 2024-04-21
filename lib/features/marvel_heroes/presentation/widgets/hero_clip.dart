@@ -26,52 +26,23 @@ class HeroClip extends StatelessWidget {
 
   late int heroId;
   late String heroName;
-  late List<Map> heroComics;
+  late List heroComics;
   late bool favorite;
   late ImageProvider image;
 
-/*
-  List listTypes(List<String> list) {
-    List tiles = [];
-    for (int i = 0; i < list.length; i++) {
-      tiles.add(
-        ClipPath(
-          clipper: PKClipper(),
-          child: Container(
-            height: 20,
-            width: 60,
-            color: colorTypePicker(list[i]),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                SvgPicture.asset('assets/types/${list[i]}.svg'),
-                Text(
-                  list[i].split(' ').map((word) => word.capitalize()).join(' '),
-                  style: const TextStyle(
-                    fontSize: 10,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
-      tiles.add(const Spacer(flex: 1));
-    }
-    return tiles;
-  }
-*/
   @override
   Widget build(BuildContext context) {
     heroId = heroes.heroes[index].id;
     heroName = heroes.heroes[index].name;
     heroComics = heroes.heroes[index].comics!;
     favorite = heroes.heroes[index].favorite;
+    image = NetworkImage(heroes.heroes[index].profilePicture);
 
-    //dummy image
-    image = const NetworkImage(
-        'https://static.vecteezy.com/ti/vetor-gratis/p3/7725022-perfil-icone-ui-icon-vetor.jpg');
+    if (heroes.heroes[index].profilePicture.contains('image_not_available')) {
+      image = const NetworkImage(
+          'https://static.vecteezy.com/ti/vetor-gratis/p3/7725022-perfil-icone-ui-icon-vetor.jpg');
+    }
+
     return SizedBox(
       width: width * 0.9,
       height: height * 0.15,
@@ -111,8 +82,6 @@ class HeroClip extends StatelessWidget {
                           ),
                         ),
                         const Spacer(),
-                        // Row(children: [...listTypes(pokemonTypes)]),
-                        // const Spacer(),
                       ],
                     ),
                   ),
@@ -121,33 +90,15 @@ class HeroClip extends StatelessWidget {
                   width: 190,
                   child: Stack(
                     children: [
-                      /*
-                      Opacity(
-                        opacity: 0.1,
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Image.asset('assets/pokeball.png',
-                              height: 140,
-                              width: 140,
-                              alignment: Alignment.centerRight,
-                              colorBlendMode: BlendMode.modulate),
-                        ),
-                      ),
-                      */
                       GestureDetector(
                         child: Hero(
                           tag: heroId,
                           child: Align(
-                            alignment: Alignment.bottomLeft,
-                            child: FadeInImage(
                               alignment: Alignment.bottomLeft,
-                              height: 100,
-                              width: 100,
-                              placeholder: image,
-                              image: image,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
+                              child: CircleAvatar(
+                                backgroundImage: image,
+                                radius: 60,
+                              )),
                         ),
                         onTap: () {
                           Navigator.of(context)

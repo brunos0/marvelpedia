@@ -5,7 +5,11 @@ part 'hero.g.dart';
 
 @HiveType(typeId: 2)
 class Hero extends HiveObject with EquatableMixin {
-  Hero({required this.id, required this.name, required this.comics});
+  Hero(
+      {required this.id,
+      required this.name,
+      required this.profilePicture,
+      required this.comics});
 
   @HiveField(0)
   final int id;
@@ -14,8 +18,10 @@ class Hero extends HiveObject with EquatableMixin {
   @HiveField(2)
   String? description;
   @HiveField(3)
-  List<Map>? comics;
+  List? comics;
   @HiveField(4)
+  final String profilePicture;
+  @HiveField(5)
   bool favorite = false;
 
   @override
@@ -24,6 +30,7 @@ class Hero extends HiveObject with EquatableMixin {
         name,
         description,
         comics,
+        profilePicture,
         favorite,
       ];
 }

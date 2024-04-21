@@ -27,172 +27,12 @@ class _HeroDetailState extends State<HeroDetail> {
   late int index;
   late int heroId;
   late String heroName;
-  late List<Map> heroComics;
-  /*
-  late String pokemonHeight;
-  late String pokemonWeight;
-  late List<String> pokemonMoves;
-  late List<String> pokemonTypes;
-  late List<String> pokemonAbilities;
-  late List<String> pokemonListEvolution;
-  late List<Map<String, dynamic>>? pokemonStats;
-  */
+  late List heroComics;
+  late String image;
   late bool favorite;
-  late List<Color> bgFadeColor;
+
   String heroDescription = '';
-  //String pokemonCategory = '';
-  //String pokemonGender = '';
-  /*
-  List listTypes(List<String> list) {
-    List tiles = [];
 
-    for (int i = 0; i < list.length; i++) {
-      tiles.add(
-        ClipPath(
-          clipper: PKClipper(),
-          child: Container(
-            height: 20,
-            width: 60,
-            color: colorTypePicker(list[i]),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                //SvgPicture.asset('assets/types/${list[i]}.svg'),
-                Text(
-                  list[i].split(' ').map((word) => word.capitalize()).join(' '),
-                  style: const TextStyle(
-                    fontSize: 10,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-          ),
-      
-      );
-      tiles.add(const Spacer(flex: 1));
-    }
-    return tiles;
-  }
-  */
-  /*
-  List showStats() {
-    int statSize = pokemonStats!.length;
-    List stats = [];
-    int total = 0;
-    for (int i = 0; i < statSize; i++) {
-      String descr = pokemonStats![i].keys.first;
-      int value = pokemonStats![i][descr];
-      if (descr == 'hp') {
-        descr = 'HP';
-      }
-      if (descr == 'attack') {
-        descr = 'Attack';
-      }
-      if (descr == 'defense') {
-        descr = 'Defense';
-      }
-      if (descr == 'special-attack') {
-        descr = 'Sp. Atk';
-      }
-      if (descr == 'special-defense') {
-        descr = 'Sp. Def';
-      }
-      if (descr == 'speed') {
-        descr = 'Speed';
-      }
-
-      stats.add(
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: 60,
-              child: Text(
-                descr,
-                textAlign: TextAlign.right,
-              ),
-            ),
-            const Gap(10),
-            SizedBox(
-              width: 30,
-              child: Text(
-                value.toString(),
-                textAlign: TextAlign.right,
-              ),
-            ),
-            const Gap(10),
-            SizedBox(
-              width: 100,
-              child: ClipPath(
-                clipper: PKClipper(),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: Container(
-                        color: value >= 60
-                            ? const Color(0XFF0804B4)
-                            : const Color(0XFFF10A34),
-                        height: 10,
-                        width: value * 1.0,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      );
-      stats.add(const Gap(10));
-      total += value;
-    }
-    stats.add(
-      Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const SizedBox(
-            width: 60,
-            child: Text(
-              'Total',
-              textAlign: TextAlign.right,
-            ),
-          ),
-          const Gap(10),
-          SizedBox(
-            width: 30,
-            child: Text(
-              total.toString(),
-              textAlign: TextAlign.right,
-            ),
-          ),
-          const SizedBox(
-            width: 100,
-          )
-        ],
-      ),
-    );
-    return stats;
-  }
-  */
-  /*
-  List listMoves() {
-    List listMoves = [];
-    int sizeMoves = pokemonMoves.length;
-    for (int i = 0; i < sizeMoves; i++) {
-      listMoves.add(
-        Text(
-          pokemonMoves[i].replaceAll('-', ' ').capitalize(),
-        ),
-      );
-      listMoves.add(const Divider());
-    }
-    return listMoves;
-  }
-  */
   @override
   Widget build(BuildContext context) {
     index = ModalRoute.of(context)!.settings.arguments as int;
@@ -200,6 +40,13 @@ class _HeroDetailState extends State<HeroDetail> {
     heroName = heroes.heroes[index].name;
     heroComics = heroes.heroes[index].comics!;
     favorite = heroes.heroes[index].favorite;
+    image = //NetworkImage(
+        heroes.heroes[index].profilePicture; //);
+
+    if (heroes.heroes[index].profilePicture.contains('image_not_available')) {
+      image =
+          'https://static.vecteezy.com/ti/vetor-gratis/p3/7725022-perfil-icone-ui-icon-vetor.jpg';
+    }
     /*
     pokemonHeight = pokemons.pokemons[index].height.toString();
     pokemonWeight = pokemons.pokemons[index].weight.toString();
@@ -213,7 +60,7 @@ class _HeroDetailState extends State<HeroDetail> {
       home: SafeArea(
         child: DefaultTabController(
           initialIndex: 0,
-          length: 4,
+          length: 2,
           child: Scaffold(
             body: BlocProvider<DetailsBloc>(
               create: (_) => sl<DetailsBloc>(),
@@ -249,38 +96,6 @@ class _HeroDetailState extends State<HeroDetail> {
                           height: 200,
                           child: Stack(
                             children: [
-                              Center(
-                                child: ClipPath(
-                                  clipper: MyCustomClipper(),
-                                  child: Container(
-                                    height: 200,
-                                    width: 380,
-                                    decoration: BoxDecoration(
-                                      gradient: LinearGradient(
-                                        colors: bgFadeColor,
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomCenter,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                child: Opacity(
-                                  opacity: 0.05,
-                                  child: Align(
-                                    alignment: Alignment.bottomLeft,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 30),
-                                      child: Image.asset('assets/pokeball.png',
-                                          height: 140,
-                                          width: 140,
-                                          alignment: Alignment.bottomLeft,
-                                          colorBlendMode: BlendMode.modulate),
-                                    ),
-                                  ),
-                                ),
-                              ),
                               SizedBox(
                                 width: 370,
                                 child: Row(
@@ -294,19 +109,7 @@ class _HeroDetailState extends State<HeroDetail> {
                                           transform: Matrix4.rotationY(math.pi),
                                           child: OverflowBox(
                                               maxHeight: 200,
-                                              child: Image.network(
-                                                  'https://static.vecteezy.com/ti/vetor-gratis/p3/7725022-perfil-icone-ui-icon-vetor.jpg')
-                                              /*
-                                            heroId == 25
-                                                ? Image.asset(
-                                                    'assets/pikachu.png',
-                                                  )
-                                                : Image.network(
-                                                    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$pokemonNumber.png',
-                                                  ),
-
-                                                  */
-                                              ),
+                                              child: Image.network(image)),
                                         ),
                                       ),
                                     ),
@@ -316,7 +119,7 @@ class _HeroDetailState extends State<HeroDetail> {
                               SizedBox(
                                 child: Padding(
                                   padding: const EdgeInsets.only(
-                                    left: 210,
+                                    left: 250,
                                     bottom: 10,
                                     top: 100,
                                   ),
@@ -332,7 +135,7 @@ class _HeroDetailState extends State<HeroDetail> {
                                         Text(
                                           '#$heroId',
                                           style: const TextStyle(
-                                              color: Colors.white,
+                                              color: Colors.black,
                                               fontSize: 14,
                                               fontFamily: 'ROBOTO'),
                                         ),
@@ -345,7 +148,7 @@ class _HeroDetailState extends State<HeroDetail> {
                                                     (word) => word.capitalize())
                                                 .join(' '),
                                             style: const TextStyle(
-                                                color: Colors.white,
+                                                //color: Colors.,
                                                 fontSize: 24,
                                                 fontWeight: FontWeight.bold,
                                                 fontFamily: 'ROBOTO'),
@@ -409,7 +212,7 @@ class _HeroDetailState extends State<HeroDetail> {
                             ],
                           ),
                         ),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 50),
                         const Padding(
                           padding: EdgeInsets.fromLTRB(
                             15,
@@ -425,9 +228,7 @@ class _HeroDetailState extends State<HeroDetail> {
                               Text(
                                 "About",
                               ),
-                              Text('Stats'),
-                              Text('Evolution'),
-                              Text('Moves'),
+                              Text('Comics'),
                             ],
                           ),
                         ),
@@ -456,61 +257,7 @@ class _HeroDetailState extends State<HeroDetail> {
                                               ),
                                             ),
                                             const Gap(30),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Column(
-                                                    children: [
-                                                      const Text("Height"),
-                                                      // Text(pokemonHeight),
-                                                    ],
-                                                  ),
-                                                  Column(
-                                                    children: [
-                                                      const Text("Weight"),
-                                                      // Text(pokemonWeight),
-                                                    ],
-                                                  ),
-                                                  Column(
-                                                    children: [
-                                                      const Text("Gender"),
-                                                      // Text(pokemonGender),
-                                                    ],
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                            const Gap(30),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Column(
-                                                    children: [
-                                                      const Text("Category"),
-                                                      // Text(pokemonCategory),
-                                                    ],
-                                                  ),
-                                                  Column(
-                                                    children: [
-                                                      const Text("Abilities"),
-                                                      //Text(pokemonAbilities.first),
-                                                    ],
-                                                  ),
-                                                  const Column(
-                                                      children: [Text("")]),
-                                                ],
-                                              ),
-                                            )
+                                            Text('xpto')
                                           ],
                                         ),
                                       ),
@@ -537,40 +284,6 @@ class _HeroDetailState extends State<HeroDetail> {
                                 ),
                               ),
                               //evolutions
-                              Center(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(30),
-                                  child: Container(
-                                      color: const Color(0XFFF7F7F7),
-                                      child: const Center(
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [Text('Coming soon!')],
-                                        ),
-                                      )),
-                                ),
-                              ),
-                              //moves
-                              Center(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(30),
-                                  child: SingleChildScrollView(
-                                    child: Container(
-                                      color: const Color(0XFFF7F7F7),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          // ...listMoves()
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
                             ],
                           ),
                         ),

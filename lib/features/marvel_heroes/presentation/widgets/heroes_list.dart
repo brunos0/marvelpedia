@@ -9,7 +9,7 @@ import 'package:marvelpedia/features/marvel_heroes/presentation/widgets/hero_cli
 import 'package:marvelpedia/injection_container.dart' as di;
 
 class HeroesList extends StatefulWidget {
-  HeroesList({required this.width, required this.height, super.key});
+  const HeroesList({required this.width, required this.height, super.key});
 
   final double width;
   final double height;
@@ -19,47 +19,23 @@ class HeroesList extends StatefulWidget {
 }
 
 class _HeroesListState extends State<HeroesList> {
-  final Heroes heroes = di.sl<Box<Heroes>>().getAt(0)!;
-  final threshold = 100300; //200.0;
+  final threshold = 1000;
   final _scrollController = ScrollController();
 
+  Heroes heroes = di.sl<Box<Heroes>>().getAt(0)!;
   _HeroesListState() {
     _scrollController.addListener(() {
-      //if (lEntra)
-      final maxScroll =
-          _scrollController.position.maxScrollExtent; //maxScrollExtent;
-      final currentScroll = _scrollController.position.pixels;
-
-      if
-          //(maxScroll - currentScroll <= threshold) {
-
-          (_scrollController.position.pixels >=
-              _scrollController.position.maxScrollExtent - 1000) {
-        print("vai atualizar");
+      if (_scrollController.position.pixels >=
+          _scrollController.position.maxScrollExtent - threshold) {
         BlocProvider.of<HeroesBloc>(context).add(
           GetHeroesEvent(increment: true),
         );
+        heroes = di.sl<Box<Heroes>>().getAt(0)!;
+        print(di.sl<Box<Heroes>>().getAt(0)!.heroes.length);
       }
     });
   }
 
-/*
-  void _scrollListener() {
-    final maxScroll = Scrollable.of(context).position.maxScrollExtent;
-    final currentScroll = Scrollable.of(context).position.pixels;
-    const threshold =
-        200.0; // Define o limite de rolagem para carregar mais itens
-
-    if (maxScroll - currentScroll <= threshold) {
-      BlocProvider.of<HeroesBloc>(context).add(
-        GetHeroesEvent(increment: true),
-      );
-      //BlocProvider.of<HeroesBloc>(context).getHeroes(true);
-      //_loadMore();
-    }
-  }
-*/
-  bool lEntra = false;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -72,7 +48,6 @@ class _HeroesListState extends State<HeroesList> {
           itemBuilder: (
             BuildContext context,
             int itemIndex,
-            //int pageViewIndex,
           ) {
             return HeroClip(
               width: widget.width,
@@ -80,15 +55,6 @@ class _HeroesListState extends State<HeroesList> {
               index: itemIndex,
             );
           },
-          /*
-          options: CarouselOptions(
-            initialPage: 3,
-            enableInfiniteScroll: true,
-            reverse: false,
-            viewportFraction: 0.148,
-            scrollDirection: Axis.vertical,
-          ),
-          */
         ),
       ),
     );
