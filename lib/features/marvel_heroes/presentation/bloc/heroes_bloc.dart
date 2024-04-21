@@ -16,18 +16,17 @@ class HeroesBloc extends Bloc<HeroesEvent, HeroesState> {
     required this.getHeroes,
   }) : super(Empty()) {
     on<HeroesEvent>((HeroesEvent event, Emitter<HeroesState> emit) async {
-      final box = di.sl<Box<Heroes>>();
+      //final box = di.sl<Box<Heroes>>();
 
       if (event is GetHeroesEvent) {
         // //if (box.isEmpty) {
-        // if (!event.increment) {
-        //   emit(Loading());
-        // }
-        emit(Loading());
+        if (!event.increment) {
+          emit(Loading());
+        }
+
         final (heroes, failure) = await getHeroes(event.increment);
 
         _eitherLoadedOrErrorState(heroes, failure, emit);
-        // }
       } else {
         if (event is RefreshEvent) {
           emit(Refresh());
@@ -43,10 +42,7 @@ class HeroesBloc extends Bloc<HeroesEvent, HeroesState> {
   }
 
   void _eitherLoadedOrErrorState(
-    Heroes? heroes,
-    Failure? failure,
-    Emitter<HeroesState> emit,
-  ) {
+      Heroes? heroes, Failure? failure, Emitter<HeroesState> emit) {
     if (failure != null) {
       emit(Error(message: _mapFailureToMessage(failure)));
     } else {

@@ -40,7 +40,7 @@ class HeroClip extends StatelessWidget {
 
     if (heroes.heroes[index].profilePicture.contains('image_not_available')) {
       image = const NetworkImage(
-          'https://static.vecteezy.com/ti/vetor-gratis/p3/7725022-perfil-icone-ui-icon-vetor.jpg');
+          'https://i.fbcd.co/products/resized/resized-750-500/d4c961732ba6ec52c0bbde63c9cb9e5dd6593826ee788080599f68920224e27d.jpg');
     }
 
     return SizedBox(
@@ -51,107 +51,115 @@ class HeroClip extends StatelessWidget {
         child: ClipPath(
           clipper: PKClipper(),
           child: Container(
-            color: Colors.white, //colorTypeBackgroundPicker(pokemonTypes[0]),
+            color: Colors.white,
             child: Row(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 30, bottom: 10),
-                  child: SizedBox(
-                    width: 130,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Spacer(),
-                        Text(
-                          '#$heroId',
-                          style: const TextStyle(
-                              fontSize: 14, fontFamily: 'ROBOTO'),
-                        ),
-                        FittedBox(
-                          fit: BoxFit.fill,
-                          child: Text(
-                            heroName
-                                .split(' ')
-                                .map((word) => word.capitalize())
-                                .join(' '),
-                            style: const TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'ROBOTO'),
-                          ),
-                        ),
-                        const Spacer(),
-                      ],
-                    ),
-                  ),
-                ),
                 SizedBox(
-                  width: 190,
-                  child: Stack(
-                    children: [
-                      GestureDetector(
-                        child: Hero(
+                  //width: 190,
+                  child: GestureDetector(
+                    child: Row(
+                      children: [
+                        Hero(
                           tag: heroId,
                           child: Align(
                               alignment: Alignment.bottomLeft,
-                              child: CircleAvatar(
-                                backgroundImage: image,
-                                radius: 60,
+                              child: SizedBox(
+                                height: 100,
+                                child: FittedBox(
+                                  fit: BoxFit.fill,
+                                  child: CircleAvatar(
+                                    backgroundImage: image,
+                                  ),
+                                ),
                               )),
                         ),
-                        onTap: () {
-                          Navigator.of(context)
-                              .pushNamed(
-                                AppRoutes.heroDetail,
-                                arguments: index,
-                              )
-                              .then((_) => BlocProvider.of<HeroesBloc>(context)
-                                  .add(RefreshEvent()));
-                        },
-                      ),
-                      Visibility(
-                        visible: favorite,
-                        child: const Padding(
-                          padding: EdgeInsets.only(top: 20, left: 150),
-                          child: Icon(
-                            Icons.favorite_outlined,
-                            color: Colors.red,
-                            size: 35,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10, left: 140),
-                        child: IconButton(
-                          icon: const Icon(Icons.favorite_border),
-                          onPressed: () {
-                            heroes.heroes[index].favorite =
-                                !heroes.heroes[index].favorite;
-                            heroes.save();
-
-                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: heroes.heroes[index].favorite
-                                    ? Text(
-                                        '${heroes.heroes[index].name} has been favorited!')
-                                    : Text(
-                                        '${heroes.heroes[index].name}  has been unfavorited!'),
-                                duration: const Duration(seconds: 2),
+                        SizedBox(
+                          width: 160,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Spacer(),
+                              Text(
+                                '#$heroId',
+                                style: const TextStyle(
+                                    fontSize: 14, fontFamily: 'ROBOTO'),
                               ),
-                            );
-
-                            BlocProvider.of<HeroesBloc>(context)
-                                .add(RefreshEvent());
-                          },
-                          iconSize: 40,
-                          style: IconButton.styleFrom(
-                            elevation: 5,
+                              FittedBox(
+                                fit: BoxFit.fill,
+                                child: Text(
+                                  heroName
+                                      .trim()
+                                      .split(' ')
+                                      .map((word) => word.capitalize())
+                                      .join(' '),
+                                  style: const TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'ROBOTO'),
+                                ),
+                              ),
+                              const Spacer(),
+                            ],
                           ),
                         ),
-                      )
-                    ],
+                        Stack(
+                          children: [
+                            Visibility(
+                              visible: favorite,
+                              child: const Padding(
+                                padding: EdgeInsets.only(top: 20, left: 50),
+                                child: Icon(
+                                  Icons.favorite_outlined,
+                                  color: Colors.red,
+                                  size: 35,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10, left: 40),
+                              child: IconButton(
+                                icon: const Icon(Icons.favorite_border),
+                                onPressed: () {
+                                  heroes.heroes[index].favorite =
+                                      !heroes.heroes[index].favorite;
+                                  heroes.save();
+
+                                  ScaffoldMessenger.of(context)
+                                      .hideCurrentSnackBar();
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: heroes.heroes[index].favorite
+                                          ? Text(
+                                              '${heroes.heroes[index].name} has been favorited!')
+                                          : Text(
+                                              '${heroes.heroes[index].name}  has been unfavorited!'),
+                                      duration: const Duration(seconds: 2),
+                                    ),
+                                  );
+
+                                  BlocProvider.of<HeroesBloc>(context)
+                                      .add(RefreshEvent());
+                                },
+                                iconSize: 40,
+                                style: IconButton.styleFrom(
+                                  elevation: 5,
+                                ),
+                              ),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                    onTap: () {
+                      Navigator.of(context)
+                          .pushNamed(
+                            AppRoutes.heroDetail,
+                            arguments: index,
+                          )
+                          .then((_) => BlocProvider.of<HeroesBloc>(context)
+                              .add(RefreshEvent()));
+                    },
                   ),
                 ),
               ],

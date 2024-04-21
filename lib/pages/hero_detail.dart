@@ -47,14 +47,6 @@ class _HeroDetailState extends State<HeroDetail> {
       image =
           'https://static.vecteezy.com/ti/vetor-gratis/p3/7725022-perfil-icone-ui-icon-vetor.jpg';
     }
-    /*
-    pokemonHeight = pokemons.pokemons[index].height.toString();
-    pokemonWeight = pokemons.pokemons[index].weight.toString();
-    pokemonMoves = pokemons.pokemons[index].moves!;
-    pokemonStats = pokemons.pokemons[index].stats;
-    pokemonAbilities = pokemons.pokemons[index].abilities!;
-    */
-    //bgFadeColor = colorTypeBGFadePicker(pokemonTypes[0]);
 
     return MaterialApp(
       home: SafeArea(
@@ -155,7 +147,7 @@ class _HeroDetailState extends State<HeroDetail> {
                                           ),
                                         ),
                                         const Spacer(),
-                                        Row(
+                                        const Row(
                                           children: [
                                             // ...listTypes(pokemonTypes)
                                           ],
@@ -257,7 +249,7 @@ class _HeroDetailState extends State<HeroDetail> {
                                               ),
                                             ),
                                             const Gap(30),
-                                            Text('xpto')
+                                            const Text('xpto')
                                           ],
                                         ),
                                       ),
@@ -271,9 +263,9 @@ class _HeroDetailState extends State<HeroDetail> {
                                   padding: const EdgeInsets.all(30),
                                   child: Container(
                                     color: const Color(0XFFF7F7F7),
-                                    child: Center(
+                                    child: const Center(
                                       child: Padding(
-                                        padding: const EdgeInsets.fromLTRB(
+                                        padding: EdgeInsets.fromLTRB(
                                             60, 30, 60, 0),
                                         child: Column(
                                             // children: [...showStats()],

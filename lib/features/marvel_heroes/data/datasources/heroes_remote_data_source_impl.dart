@@ -69,7 +69,10 @@ class HeroesRemoteDataSourceImpl implements HeroesRemoteDataSource {
         }
         */
         if (increment) {
-          box.getAt(0)!.heroes.addAll(mhModel.heroes);
+          final heroes = box.getAt(0)!.heroes;
+          heroes.addAll(mhModel.heroes);
+          final updatedHeroes = Heroes(heroes: heroes, step: 1);
+          await box.putAt(0, updatedHeroes);
         } else {
           box.add(mhModel);
         }
