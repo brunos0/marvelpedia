@@ -6,7 +6,7 @@ import 'package:marvelpedia/features/marvel_heroes/domain/entities/heroes.dart';
 import 'package:marvelpedia/features/marvel_heroes/domain/usecases/get_heroes.dart';
 import 'package:marvelpedia/features/marvel_heroes/presentation/bloc/heroes_event.dart';
 import 'package:marvelpedia/features/marvel_heroes/presentation/bloc/heroes_state.dart';
-import 'package:marvelpedia/injection_container.dart' as di;
+//import 'package:marvelpedia/injection_container.dart' as di;
 
 const String serverFailureMessage = 'Server Failure';
 const String noInternetFailureMessage = 'No Internet Failure';
