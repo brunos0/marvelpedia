@@ -34,14 +34,16 @@ class _HeroesListState extends State<HeroesList> {
     _scrollController = ScrollController();
     _scrollController.addListener(_scrollListener);
     items.addListener(() {
-      setState(() {
-        _isLoading = false;
-        _scrollController.animateTo(
-          _scrollController.offset + 300,
-          duration: const Duration(seconds: 1),
-          curve: Curves.easeInOut,
-        );
-      });
+      if (_isLoading == true) {
+        setState(() {
+          _isLoading = false;
+          _scrollController.animateTo(
+            _scrollController.offset + 300,
+            duration: const Duration(seconds: 1),
+            curve: Curves.easeInOut,
+          );
+        });
+      }
     });
   }
 
