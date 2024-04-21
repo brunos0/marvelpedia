@@ -18,12 +18,22 @@ class HeroesModel extends Heroes {
     int listSize = jsonList.length;
 
     for (int i = 0; i < listSize; i++) {
+      var listComicsJson = jsonList[i]['comics']['items'] as List;
+      final listComics = [];
+      if (listComicsJson.isNotEmpty) {
+        listComicsJson.forEach((element) {
+          listComics.add(element['name']);
+        });
+      }
+      //.forEach
       heroes.add(Hero(
           id: jsonList[i]['id'],
           name: '${jsonList[i]['name']}',
           profilePicture:
               '${jsonList[i]['thumbnail']['path']}.${jsonList[i]['thumbnail']['extension']}',
-          comics: [] //'${jsonList[i]['comics']['items'][name]}}'},
+          comics: listComics
+
+          //'${jsonList[i]['comics']['items'][name]}}'},
           ));
     }
 

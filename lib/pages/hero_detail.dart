@@ -48,6 +48,18 @@ class _HeroDetailState extends State<HeroDetail> {
           'https://static.vecteezy.com/ti/vetor-gratis/p3/7725022-perfil-icone-ui-icon-vetor.jpg';
     }
 
+    List listComics() {
+      List listComics = [];
+      int sizeComics = heroComics.length;
+      for (int i = 0; i < sizeComics; i++) {
+        listComics.add(
+          Text(heroComics[i]),
+        );
+        listComics.add(const Divider());
+      }
+      return listComics;
+    }
+
     return MaterialApp(
       home: SafeArea(
         child: DefaultTabController(
@@ -261,21 +273,20 @@ class _HeroDetailState extends State<HeroDetail> {
                               Center(
                                 child: Padding(
                                   padding: const EdgeInsets.all(30),
-                                  child: Container(
-                                    color: const Color(0XFFF7F7F7),
-                                    child: const Center(
-                                      child: Padding(
-                                        padding: EdgeInsets.fromLTRB(
-                                            60, 30, 60, 0),
-                                        child: Column(
-                                            // children: [...showStats()],
-                                            ),
+                                  child: SingleChildScrollView(
+                                    child: Container(
+                                      color: const Color(0XFFF7F7F7),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [...listComics()],
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
-                              //evolutions
                             ],
                           ),
                         ),
