@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "324910213465",
+    "project_id": "marvelpedia-bc95d",
+    "storage_bucket": "marvelpedia-bc95d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:324910213465:android:4fff2328c8e79ea39b8448",
+        "android_client_info": {
+          "package_name": "br.dev.coderia.marvelpedia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBx53MrtH1H1ut9MrV198pvk90dGupabxo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

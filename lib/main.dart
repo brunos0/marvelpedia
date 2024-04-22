@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marvelpedia/features/marvel_heroes/presentation/bloc/details_bloc.dart';
@@ -5,10 +6,14 @@ import 'package:marvelpedia/features/marvel_heroes/presentation/bloc/heroes_bloc
 import 'package:marvelpedia/injection_container.dart' as di;
 import 'package:marvelpedia/injection_container.dart';
 import 'package:marvelpedia/utils/routes.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     MultiBlocProvider(
       providers: [

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marvelpedia/core/services/auth_service.dart';
 import 'package:marvelpedia/features/marvel_heroes/presentation/bloc/heroes_bloc.dart';
 import 'package:marvelpedia/features/marvel_heroes/presentation/bloc/heroes_event.dart';
 import 'package:marvelpedia/features/marvel_heroes/presentation/bloc/heroes_state.dart';
@@ -23,6 +24,15 @@ class _HeroesPageState extends State<HeroesPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          actions: [
+            IconButton(
+                onPressed: () {
+                  AuthService().logout();
+                },
+                icon: const Icon(Icons.exit_to_app))
+          ],
+        ),
         bottomNavigationBar: BottomNavigationBar(
           key: navBarKey,
           items: <BottomNavigationBarItem>[
