@@ -17,8 +17,8 @@ Improve Details format.
   
 ## Give a try!  
 
-https://drive.google.com/file/d/1CwAsw-tSuZ_TxIT_Jj_pZaNm4PgOgC-k/view?usp=sharing
+https://drive.google.com/file/d/1T-iLKRvMo21_2BKxB_E-qoIJ0VTfPkaY/view?usp=share_link
 
 ## Screenshots  
 
-<img src="https://github.com/brunos0/pocketpedia/assets/49425249/51038743-6ad9-423d-a386-1a64ea4ce20e" width="260"> <img src="https://github.com/brunos0/pocketpedia/assets/49425249/c07fcaee-5f75-4d87-977e-dcc08f99f63e" width="260"> <img src="https://github.com/brunos0/pocketpedia/assets/49425249/588d537d-0b3b-482b-b8dd-ef31794b404a" width="260"> <img src="https://github.com/brunos0/pocketpedia/assets/49425249/a08ff5d7-1ed2-4d6a-b9f3-ad17174d0aa6" width="260"> <img src="https://github.com/brunos0/pocketpedia/assets/49425249/614a37de-fa21-4700-b231-9c00454de66e" width="260">
+<img src="https://github.com/brunos0/marvelpedia/assets/49425249/29cf22bb-dd6e-4af5-b093-71cd5f476ef9" width="260"> <img src="https://github.com/brunos0/marvelpedia/assets/49425249/79f979bf-c411-4e96-a3e6-9697942cd6d9" width="260"> <img src="https://github.com/brunos0/marvelpedia/assets/49425249/8ab619b4-1d7a-4544-ad15-4eb7b706bd60" width="260"> <img src="https://github.com/brunos0/marvelpedia/assets/49425249/8f2812fb-4bff-432e-8475-1ff3b9dc816a" width="260">
