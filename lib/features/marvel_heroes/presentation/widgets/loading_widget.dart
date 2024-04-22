@@ -38,8 +38,8 @@ class _LoadingWidgetState extends State<LoadingWidget> {
           const Gap(10),
           Image.asset(
             'assets/marvel.gif',
-            height: 100,
-            width: 100,
+            height: 300,
+            width: 300,
           )
         ],
       )),

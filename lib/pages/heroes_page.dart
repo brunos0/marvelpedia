@@ -58,7 +58,7 @@ class _HeroesPageState extends State<HeroesPage> {
                       Icons.favorite_border,
                       color: Colors.black,
                     ),
-              label: 'Favoritos',
+              label: 'Favorites',
             ),
             BottomNavigationBarItem(
               icon: _selectedIndex == 2
@@ -70,7 +70,7 @@ class _HeroesPageState extends State<HeroesPage> {
                       Icons.person_outline_outlined,
                       color: Colors.black,
                     ),
-              label: 'Perfil',
+              label: 'Profile',
             ),
           ],
           currentIndex: _selectedIndex,
@@ -97,7 +97,7 @@ class _HeroesPageState extends State<HeroesPage> {
               BlocProvider.of<HeroesBloc>(context).add(
                 GetHeroesEvent(increment: false),
               );
-              return const MessageDisplay(message: 'Loading app!');
+              return const SizedBox.shrink();
             } else if (state is Loading) {
               return const LoadingWidget();
             } else if (state is Loaded) {
