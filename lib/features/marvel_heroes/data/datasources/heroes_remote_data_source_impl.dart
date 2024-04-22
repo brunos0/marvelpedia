@@ -7,10 +7,6 @@ import 'package:marvelpedia/features/marvel_heroes/data/datasources/heroes_remot
 import 'package:marvelpedia/features/marvel_heroes/data/models/heroes_model.dart';
 import 'package:marvelpedia/features/marvel_heroes/domain/entities/heroes.dart';
 import 'package:marvelpedia/core/error/exceptions.dart';
-import 'package:marvelpedia/features/marvel_heroes/presentation/bloc/heroes_state.dart';
-//import 'package:marvelpedia/features/marvel_heroes/data/datasources/heroes_remote_data_source.dart';
-//import 'package:marvelpedia/features/marvel_heroes/data/models/heroes_model.dart';
-//import 'package:marvelpedia/features/marvel_heroes/domain/entities/heroes.dart';
 import 'package:marvelpedia/injection_container.dart' as di;
 
 String publicKey = const String.fromEnvironment('PUBLIC_KEY');

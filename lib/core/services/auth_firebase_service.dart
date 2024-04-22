@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:marvelpedia/core/models/usuario_app.dart';
 import 'package:marvelpedia/core/services/auth_service.dart';
-//import 'package:provider/provider.dart';
 
 class AuthFirebaseService implements AuthService {
   static UsuarioApp? _currentUser;
@@ -18,7 +17,6 @@ class AuthFirebaseService implements AuthService {
     }
   });
 
-  @override
   UsuarioApp? get currentUser {
     return _currentUser;
   }
@@ -59,16 +57,11 @@ class AuthFirebaseService implements AuthService {
     FirebaseAuth.instance.signOut();
   }
 
-  static Future<UsuarioApp> _toChatUser(User user,
-      [String? name /*, String? imageUrl, String? userFCMToken*/]) async {
-    //userFCMToken ??= await FirebaseMessaging.instance.getToken();
-
+  static Future<UsuarioApp> _toChatUser(User user, [String? name]) async {
     return UsuarioApp(
       id: user.uid,
       nome: name ?? user.displayName ?? user.email!.split('@')[0],
       email: user.email!,
-      //imageURL: imageUrl ?? user.photoURL ?? 'assets/images/avatar.png',
-      //userFCMToken: userFCMToken!
     );
   }
 }

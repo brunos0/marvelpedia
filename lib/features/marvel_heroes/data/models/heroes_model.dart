@@ -12,8 +12,6 @@ class HeroesModel extends Heroes {
   factory HeroesModel.fromJson(Map<String, dynamic> json) {
     List<Hero> heroes = [];
 
-    // TODO(bruno): implements
-
     final List<dynamic> jsonList = json['data']['results'];
     int listSize = jsonList.length;
 
@@ -25,7 +23,7 @@ class HeroesModel extends Heroes {
           listComics.add(element['name']);
         });
       }
-      //.forEach
+
       heroes.add(Hero(
         id: jsonList[i]['id'],
         name: '${jsonList[i]['name']}',
@@ -33,8 +31,6 @@ class HeroesModel extends Heroes {
             '${jsonList[i]['thumbnail']['path']}.${jsonList[i]['thumbnail']['extension']}',
         comics: listComics,
         description: '${jsonList[i]['description']}',
-
-        //'${jsonList[i]['comics']['items'][name]}}'},
       ));
     }
 

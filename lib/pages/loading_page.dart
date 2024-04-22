@@ -16,12 +16,6 @@ class LoadingPage extends StatelessWidget {
               height: 100,
               child: RefreshProgressIndicator(),
             ),
-            //LinearProgressIndicator(),
-            /*
-            CircularProgressIndicator(
-              backgroundColor: Colors.white,
-            ),
-            */
             Text(
               'Carregando...',
               style: TextStyle(

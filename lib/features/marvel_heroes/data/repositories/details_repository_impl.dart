@@ -18,7 +18,7 @@ class DetailsRepositoryImpl implements DetailsRepository {
       try {
         final pokemonsDetail = await remoteDataSource.getDetail(pokemonNumber);
 
-        return (pokemonsDetail, null); // mas repositório retorna dois
+        return (pokemonsDetail, null);
       } on ServerException {
         return (null, ServerFailure());
       }

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:marvelpedia/core/models/auth_form_data.dart';
 
@@ -15,10 +13,6 @@ class AuthForm extends StatefulWidget {
 class _AuthFormState extends State<AuthForm> {
   final _formKey = GlobalKey<FormState>();
   final _authFormData = AuthFormData();
-
-  // void _handleImagePick(File image) {
-  //   _authFormData.image = image;
-  // }
 
   void _showError(String msg) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -85,7 +79,7 @@ class _AuthFormState extends State<AuthForm> {
                 validator: (pwdParam) {
                   final password = pwdParam ?? '';
                   if (password.length < 6) {
-                    return 'Senha deve ter maios que 6 caracteres.';
+                    return 'Senha deve ter maior que 6 caracteres.';
                   }
                   return null;
                 },

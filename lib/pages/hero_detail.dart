@@ -1,19 +1,14 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-//import 'package:flutter_svg/svg.dart';
-import 'package:gap/gap.dart';
 import 'package:hive/hive.dart';
 import 'package:marvelpedia/features/marvel_heroes/domain/entities/heroes.dart';
 import 'package:marvelpedia/features/marvel_heroes/presentation/bloc/details_bloc.dart';
 import 'package:marvelpedia/features/marvel_heroes/presentation/bloc/details_event.dart';
 import 'package:marvelpedia/features/marvel_heroes/presentation/bloc/details_state.dart';
-//import 'package:marvelpedia/features/marvel_heroes/presentation/widgets/pkclipper.dart';
 import 'package:marvelpedia/injection_container.dart' as di;
 import 'package:marvelpedia/injection_container.dart';
-//import 'package:marvelpedia/utils/color_picker.dart';
 import 'package:marvelpedia/utils/string_extensions.dart';
 
 class HeroDetail extends StatefulWidget {
@@ -42,8 +37,7 @@ class _HeroDetailState extends State<HeroDetail> {
     heroComics = heroes.heroes[index].comics!;
     heroDescription = heroes.heroes[index].description ?? '';
     favorite = heroes.heroes[index].favorite;
-    image = //NetworkImage(
-        heroes.heroes[index].profilePicture; //);
+    image = heroes.heroes[index].profilePicture;
 
     if (heroes.heroes[index].profilePicture.contains('image_not_available')) {
       image =
@@ -81,17 +75,6 @@ class _HeroDetailState extends State<HeroDetail> {
                     }
 
                     if (state is DetailsLoaded) {
-                      /*
-                      var listEvolution;
-                      var description;
-                      var category;
-                      (listEvolution, description, category) =
-                          state.result as (List, String, String);
-
-                      pokemonListEvolution = listEvolution;
-                      pokemonCategory = category;
-                      pokemonDescription = description;
-                      */
                       BlocProvider.of<DetailsBloc>(context)
                           .add(DetailsRefreshEvent());
                     }

@@ -123,6 +123,5 @@ class _HeroesPageState extends State<HeroesPage> {
   @override
   void dispose() {
     super.dispose();
-    //Hive.close();
   }
 }
