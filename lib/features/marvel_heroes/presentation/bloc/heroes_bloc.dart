@@ -16,12 +16,10 @@ class HeroesBloc extends Bloc<HeroesEvent, HeroesState> {
     required this.getHeroes,
   }) : super(Empty()) {
     on<HeroesEvent>((HeroesEvent event, Emitter<HeroesState> emit) async {
-      //final box = di.sl<Box<Heroes>>();
-
       if (event is GetHeroesEvent) {
-        // //if (box.isEmpty) {
         if (!event.increment) {
           emit(Loading());
+          await Future.delayed(const Duration(seconds: 40));
         }
 
         final (heroes, failure) = await getHeroes(event.increment);

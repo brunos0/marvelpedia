@@ -27,21 +27,22 @@ class HeroesModel extends Heroes {
       }
       //.forEach
       heroes.add(Hero(
-          id: jsonList[i]['id'],
-          name: '${jsonList[i]['name']}',
-          profilePicture:
-              '${jsonList[i]['thumbnail']['path']}.${jsonList[i]['thumbnail']['extension']}',
-          comics: listComics
+        id: jsonList[i]['id'],
+        name: '${jsonList[i]['name']}',
+        profilePicture:
+            '${jsonList[i]['thumbnail']['path']}.${jsonList[i]['thumbnail']['extension']}',
+        comics: listComics,
+        description: '${jsonList[i]['description']}',
 
-          //'${jsonList[i]['comics']['items'][name]}}'},
-          ));
+        //'${jsonList[i]['comics']['items'][name]}}'},
+      ));
     }
 
     return HeroesModel(heroes: heroes, step: 1);
   }
 
   String detailsFromJson(Map<String, dynamic> json) {
-    final description = json['description'];
+    final description = json["data"]["results"][0]['description'];
 
     return description;
   }

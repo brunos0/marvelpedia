@@ -21,9 +21,8 @@ class HeroAdapter extends TypeAdapter<Hero> {
       name: fields[1] as String,
       profilePicture: fields[4] as String,
       comics: (fields[3] as List?)?.cast<dynamic>(),
-    )
-      ..description = fields[2] as String?
-      ..favorite = fields[5] as bool;
+      description: fields[2] as String?,
+    )..favorite = fields[5] as bool;
   }
 
   @override

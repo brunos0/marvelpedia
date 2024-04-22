@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 //import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
@@ -39,6 +40,7 @@ class _HeroDetailState extends State<HeroDetail> {
     heroId = heroes.heroes[index].id;
     heroName = heroes.heroes[index].name;
     heroComics = heroes.heroes[index].comics!;
+    heroDescription = heroes.heroes[index].description ?? '';
     favorite = heroes.heroes[index].favorite;
     image = //NetworkImage(
         heroes.heroes[index].profilePicture; //);
@@ -152,17 +154,10 @@ class _HeroDetailState extends State<HeroDetail> {
                                                     (word) => word.capitalize())
                                                 .join(' '),
                                             style: const TextStyle(
-                                                //color: Colors.,
                                                 fontSize: 24,
                                                 fontWeight: FontWeight.bold,
                                                 fontFamily: 'ROBOTO'),
                                           ),
-                                        ),
-                                        const Spacer(),
-                                        const Row(
-                                          children: [
-                                            // ...listTypes(pokemonTypes)
-                                          ],
                                         ),
                                         const Spacer(),
                                       ],
@@ -230,7 +225,7 @@ class _HeroDetailState extends State<HeroDetail> {
                             labelColor: Colors.red,
                             tabs: <Widget>[
                               Text(
-                                "About",
+                                "Bio",
                               ),
                               Text('Comics'),
                             ],
@@ -243,33 +238,21 @@ class _HeroDetailState extends State<HeroDetail> {
                               Center(
                                 child: Padding(
                                   padding: const EdgeInsets.all(30),
-                                  child: Container(
-                                    color: const Color(0XFFF7F7F7),
-                                    child: Center(
-                                      child: Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            60, 30, 60, 0),
-                                        child: Column(
-                                          children: [
-                                            SizedBox(
-                                              width: 300,
-                                              child: Text(
-                                                heroDescription,
-                                                style: const TextStyle(
-                                                    fontSize: 12),
-                                                textAlign: TextAlign.justify,
-                                              ),
-                                            ),
-                                            const Gap(30),
-                                            const Text('xpto')
-                                          ],
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      SingleChildScrollView(
+                                        child: Text(
+                                          heroDescription,
+                                          style: const TextStyle(fontSize: 12),
+                                          textAlign: TextAlign.justify,
                                         ),
                                       ),
-                                    ),
+                                    ],
                                   ),
                                 ),
                               ),
-                              //stats
+                              //comics
                               Center(
                                 child: Padding(
                                   padding: const EdgeInsets.all(30),

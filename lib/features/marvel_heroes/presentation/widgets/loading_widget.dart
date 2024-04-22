@@ -18,7 +18,7 @@ class _LoadingWidgetState extends State<LoadingWidget> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await player.setAsset('assets/title.mp3');
+      await player.setAsset('assets/marvel_intro.mp3');
       player.setLoopMode(LoopMode.one);
       player.play();
     });
@@ -26,21 +26,24 @@ class _LoadingWidgetState extends State<LoadingWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Text('Retrieving Heroes list from Marvel Server!'),
-        const Text('Please Wait!'),
-        const Gap(10),
-        Image.asset(
-          'assets/marvel.gif',
-          height: 100,
-          width: 100,
-        )
-      ],
-    ));
+    return Container(
+      decoration: const BoxDecoration(color: Colors.blue),
+      child: Center(
+          child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text('Retrieving Heroes list from Marvel Server!'),
+          const Text('Please Wait!'),
+          const Gap(10),
+          Image.asset(
+            'assets/marvel.gif',
+            height: 100,
+            width: 100,
+          )
+        ],
+      )),
+    );
   }
 
   @override

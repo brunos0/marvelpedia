@@ -9,7 +9,8 @@ class Hero extends HiveObject with EquatableMixin {
       {required this.id,
       required this.name,
       required this.profilePicture,
-      required this.comics});
+      required this.comics,
+      required this.description});
 
   @HiveField(0)
   final int id;

@@ -7,6 +7,7 @@ import 'package:marvelpedia/features/marvel_heroes/data/datasources/heroes_remot
 import 'package:marvelpedia/features/marvel_heroes/data/models/heroes_model.dart';
 import 'package:marvelpedia/features/marvel_heroes/domain/entities/heroes.dart';
 import 'package:marvelpedia/core/error/exceptions.dart';
+import 'package:marvelpedia/features/marvel_heroes/presentation/bloc/heroes_state.dart';
 //import 'package:marvelpedia/features/marvel_heroes/data/datasources/heroes_remote_data_source.dart';
 //import 'package:marvelpedia/features/marvel_heroes/data/models/heroes_model.dart';
 //import 'package:marvelpedia/features/marvel_heroes/domain/entities/heroes.dart';
@@ -28,11 +29,11 @@ class HeroesRemoteDataSourceImpl implements HeroesRemoteDataSource {
       int offsetHero = 0;
 
       if (increment) {
-        offsetHero = di.sl<Box<Heroes>>().getAt(0)!.heroes.length + 100;
+        offsetHero = di.sl<Box<Heroes>>().getAt(0)!.heroes.length;
       }
       final response = await client.get(
           Uri.parse(
-              '''https://gateway.marvel.com:443/v1/public/characters?apikey='''
+              '''https://gateway.marvel.com:443/v1/public/characters?orderBy=name&apikey='''
               '''$publicKey&hash=$hash&ts=1&limit=100&offset=$offsetHero'''),
           headers: {
             'Content-Type': 'application/json; charset=utf-8',
@@ -40,34 +41,7 @@ class HeroesRemoteDataSourceImpl implements HeroesRemoteDataSource {
 
       if (response.statusCode == 200) {
         final mhModel = HeroesModel.fromJson(json.decode(response.body));
-        /*
-        if (mhModel.step == 1) {
-          final listSize = mhModel.heroes.length;
-          for (int i = 0; i < listSize; i++) {
-            final response = await client.get(
-                Uri.parse(
-                  'https://pokeapi.co/api/v2/pokemon/${mhModel.heroes[i].name.trim()}',
-                ),
-                headers: {
-                  'Content-Type': 'application/json; charset=utf-8',
-                });
-            if (response.statusCode == 200) {
-              //
-              String description =
-                  mhModel.detailsFromJson(json.decode(response.body));
-              mhModel.heroes[i].description = description;
-              /*//abilities;
-              pkModel.pokemons[i].moves = moves;
-              pkModel.pokemons[i].weight = weight;
-              pkModel.pokemons[i].height = height;
-              pkModel.pokemons[i].types = types;
-              pkModel.pokemons[i].stats = stats;
-              */
-              mhModel.step = 2;
-            }
-          }
-        }
-        */
+
         if (increment) {
           final heroes = box.getAt(0)!.heroes;
           heroes.addAll(mhModel.heroes);

@@ -77,34 +77,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/pikachu.png
-    - assets/pokeball.png  
-    - assets/types/bug.svg
-    - assets/types/dark.svg
-    - assets/types/dragon.svg
-    - assets/types/electric.svg
-    - assets/types/fairy.svg
-    - assets/types/fighting.svg
-    - assets/types/fire.svg
-    - assets/types/flying.svg
-    - assets/types/ghost.svg
-    - assets/types/grass.svg
-    - assets/types/ground.svg
-    - assets/types/ice.svg
-    - assets/types/normal.svg
-    - assets/types/poison.svg
-    - assets/types/psychic.svg
-    - assets/types/rock.svg
-    - assets/types/steel.svg
-    - assets/types/water.svg
-    - assets/title.mp3
+    - assets/marvel_intro.mp3
     - assets/marvel.gif
-    - assets/navbar/profile_on.png
-    - assets/navbar/profile_off.png
-    - assets/navbar/favorite_on.png
-    - assets/navbar/favorite_off.png
-    - assets/navbar/home_on.png
-    - assets/navbar/home_off.png
     - assets/profile_pic.jpeg
     - assets/in.png
     - assets/git.jpeg
